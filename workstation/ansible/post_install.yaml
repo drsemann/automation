@@ -1,0 +1,40 @@
+- hosts: localhost
+  become: true
+  tasks:
+  - name: Install packages
+  package: name={{item}}
+  with_items:
+    - htop
+    - iotop
+    - iftop
+    - hdparm
+    - locate
+    - traceroute
+    - tree
+    - ipcalc
+    - sipcalc
+    - whois
+    - dnsutils
+    - net-tools
+    - ncdu
+    - neofetch
+    - bash-completion
+    - fzf
+    - curl
+    - grc
+    - nmap
+    - links
+    - tcpdump
+    - ethtool
+    - iptraf-ng
+    - micro
+    - qbittorrent
+    - sed
+    - bpytop
+    - exa
+    - ansible 
+    - python3-pip
+    - golang
+    - zsh
+    - zsh-autosuggestions
+    - zsh-syntax-highlighting
