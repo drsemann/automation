@@ -78,38 +78,38 @@
 
 - block:
   - name: Install Microsoft Key
-        become: true
+    become: true
         apt_key:
           url: 'https://packages.microsoft.com/keys/microsoft.asc'
           state: present
       - name: Install VSCode Repository
-        become: true
+      become: true
         apt_repository:
           repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main'
           state: present
           filename: vscode
       - name: Install Visual Studio Code
-        become: true
+      become: true
         apt:
           name: code
 
 - block:
   - name: Install Terraform
-        become: true
+    become: true
         apt_key:
           url: 'https://apt.releases.hashicorp.com/gpg'
           state: present
       - name: Install Hashicorp Repository
-        become: true
+    become: true
         apt_repository:
           repo: 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main'
           state: present
           filename: hashicorp
       - name: Install Terraform
-        become: true
+      become: true
         apt:
           name: terraform
       - name: Install Packer
-        become: true
+      become: true
         apt:
           name: packer
