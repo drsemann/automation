@@ -91,18 +91,18 @@
         name: code
 
   - block:
-  - name: Install Terraform
-    apt_key:
-      url: 'https://apt.releases.hashicorp.com/gpg'
-      state: present
-  - name: Install Hashicorp Repository
-    apt_repository:
+    - name: Install Terraform
+      apt_key:
+        url: 'https://apt.releases.hashicorp.com/gpg'
+        state: present
+    - name: Install Hashicorp Repository
+      apt_repository:
         repo: 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main'
         state: present
         filename: hashicorp
-  - name: Install Terraform
-    apt:
-      name: terraform
+    - name: Install Terraform
+      apt:
+        name: terraform
   - name: Install Packer
     apt:
       name: packer
