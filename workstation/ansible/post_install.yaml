@@ -77,17 +77,17 @@
       command: flatpak install --assumeyes flathub com.anydesk.Anydesk
 
   - block:
-      - name: Install Microsoft Key
-        apt_key:
+    - name: Install Microsoft Key
+      apt_key:
         url: 'https://packages.microsoft.com/keys/microsoft.asc'
         state: present
-      - name: Install VSCode Repository
-        apt_repository:
+    - name: Install VSCode Repository
+      apt_repository:
         repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main'
         state: present
         filename: vscode
-      - name: Install Visual Studio Code
-        apt:
+    - name: Install Visual Studio Code
+      apt:
         name: code
 
   - block:
