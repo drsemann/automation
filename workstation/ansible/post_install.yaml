@@ -15,7 +15,7 @@
       name: '*' 
       state: latest
       update_cache: yes
-      only_upgrade: yes
+      update_only: yes
     when: ansible_os_family == 'RedHat'
 
   - name: Install packages
