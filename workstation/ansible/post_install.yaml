@@ -94,6 +94,7 @@
     - name: Install Terraform
       apt_key:
         url: 'https://apt.releases.hashicorp.com/gpg'
+        keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
         state: present
     - name: Install Hashicorp Repository
       apt_repository:
