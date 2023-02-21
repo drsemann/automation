@@ -119,18 +119,16 @@
         repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
         state: present
         filename: docker
-    - name: Install docker-ce
+    - name: installa docker
       apt:
-        name: docker-ce
-    - name: Install docker-ce-cli
-      apt:
-        name: docker-ce-cli
-    - name: Install containerd.io
-      apt:
-        name: containerd.io
-    - name: Install docker-compose-plugin
-      apt:
-        name: docker-compose-plugin
+        name: "{{item}}"
+        state: latest
+        update_cache: yes
+      loop:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-compose-plugin
     - name: Adding existing user to group Docker
       user: 
         name: '{{ ansible_user_id }}'
