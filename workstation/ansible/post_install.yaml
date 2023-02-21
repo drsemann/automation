@@ -55,3 +55,22 @@
       - zsh
       - zsh-autosuggestions
       - zsh-syntax-highlighting
+
+  - name: Enable Flathub Repositorio
+    command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  - name: Install Spotify
+    command: flatpak install --assumeyes flathub com.spotify.Client
+  - name: Install Discord
+    command: flatpak install --assumeyes flathub com.discordapp.Discord
+  - name: Install ExtensionManager
+    command: flatpak install --assumeyes flathub com.mattjakeman.ExtensionManager
+  - name: Install Drawio
+    command: flatpak install --assumeyes flathub com.jgraph.drawio.desktop
+  - name: Install Obsidian
+    command: flatpak install --assumeyes flathub md.obsidian.Obsidian
+  - name: Install Arduino IDE2
+    command: flatpak install --assumeyes flathub cc.arduino.IDE2
+  - name: Install Remmina
+    command: flatpak install --assumeyes flathub org.remmina.Remmina
+  - name: Install Anydesk
+    command: flatpak install --assumeyes flathub com.anydesk.Anydesk
