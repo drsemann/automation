@@ -56,16 +56,60 @@
       - zsh-autosuggestions
       - zsh-syntax-highlighting
       - gnome-tweaks
-
+- block:
   - name: Enable Flathub Repositorio
     command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   - name: Install Flatpak App
-    command: flatpak install --assumeyes name={{item}}
-    with_items:
-      - com.discordapp.Discord
-      - com.mattjakeman.ExtensionManager
-      - com.jgraph.drawio.desktop
-      - md.obsidian.Obsidian
-      - cc.arduino.IDE2
-      - org.remmina.Remmina
-      - com.anydesk.Anydesk
+    command: flatpak install --assumeyes flathub com.spotify.Client
+  - name: Install Discord
+    command: flatpak install --assumeyes flathub com.discordapp.Discord
+  - name: Install ExtensionManager
+    command: flatpak install --assumeyes flathub com.mattjakeman.ExtensionManager
+  - name: Install Drawio
+    command: flatpak install --assumeyes flathub com.jgraph.drawio.desktop
+  - name: Install Obsidian
+    command: flatpak install --assumeyes flathub md.obsidian.Obsidian
+  - name: Install Arduino IDE2
+    command: flatpak install --assumeyes flathub cc.arduino.IDE2
+  - name: Install Remmina
+    command: flatpak install --assumeyes flathub org.remmina.Remmina
+  - name: Install Anydesk
+    command: flatpak install --assumeyes flathub com.anydesk.Anydesk
+
+- block:
+  - name: Install Microsoft Key
+        become: true
+        apt_key:
+          url: 'https://packages.microsoft.com/keys/microsoft.asc'
+          state: present
+      - name: Install VSCode Repository
+        become: true
+        apt_repository:
+          repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main'
+          state: present
+          filename: vscode
+      - name: Install Visual Studio Code
+        become: true
+        apt:
+          name: code
+
+- block:
+  - name: Install Terraform
+        become: true
+        apt_key:
+          url: 'https://apt.releases.hashicorp.com/gpg'
+          state: present
+      - name: Install Hashicorp Repository
+        become: true
+        apt_repository:
+          repo: 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main'
+          state: present
+          filename: hashicorp
+      - name: Install Terraform
+        become: true
+        apt:
+          name: terraform
+      - name: Install Packer
+        become: true
+        apt:
+          name: packer
