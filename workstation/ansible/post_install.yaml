@@ -20,7 +20,7 @@
 
   - name: Install packages
     package: name={{item}}
-    with_items:
+    loop:
       - htop
       - iotop
       - iftop
@@ -56,6 +56,7 @@
       - zsh-autosuggestions
       - zsh-syntax-highlighting
       - gnome-tweaks
+
   - block:
     - name: Enable Flathub Repositorio
       command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -91,7 +92,7 @@
         name: code
 
   - block:
-    - name: Install Terraform
+    - name: Install Terraform Key
       apt_key:
         url: 'https://apt.releases.hashicorp.com/gpg'
         keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
@@ -109,17 +110,17 @@
       name: packer
 
   - block:
-    - name: Install Docker
+    - name: Install Docker Key
       apt_key:
         url: 'https://download.docker.com/linux/ubuntu/gpg'
         keyring: /usr/share/keyrings/docker.gpg
         state: present
-    - name: Install Hashicorp Repository
+    - name: Install Docker Repository
       apt_repository:
         repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
         state: present
         filename: docker
-    - name: installa docker
+    - name: Install Docker
       apt:
         name: "{{item}}"
         state: latest
@@ -134,3 +135,32 @@
         name: netuno
         groups: docker 
         append: yes
+  
+  - block:
+    - name: Install Brave Key
+      apt_key:
+        url: 'https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg'
+        keyring: /usr/share/keyrings/brave-browser-archive-keyring.gpg
+        state: present
+    - name: Install Brave Repository
+      apt_repository:
+        repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main'
+        state: present
+        filename: brave
+    - name: Install Brave
+      apt:
+        name: brave-browser
+  - block:
+    - name: Install Kubernetes Key
+      apt_key:
+        url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+        keyring: /etc/apt/keyrings/kubernetes-archive-keyring.gpg
+        state: present
+    - name: Install Brave Repository
+      apt_repository:
+        repo: 'deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main'
+        state: present
+        filename: kubernetes
+    - name: Install Kubectl
+      apt:
+        name: kubectl
