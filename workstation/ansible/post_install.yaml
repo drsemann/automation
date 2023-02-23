@@ -60,7 +60,7 @@
   - block:
     - name: Enable Flathub Repositorio
       command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    - name: Install Flatpak App
+    - name: Install Flatpak Spotify
       command: flatpak install --assumeyes flathub com.spotify.Client
     - name: Install Discord
       command: flatpak install --assumeyes flathub com.discordapp.Discord
