@@ -132,7 +132,7 @@
         - docker-compose-plugin
     - name: Adding existing user to group Docker
       user: 
-        name: netuno
+        name: '{{ ansible_user_id }}'
         groups: docker 
         append: yes
   
