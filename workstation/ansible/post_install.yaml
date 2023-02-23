@@ -60,23 +60,19 @@
   - block:
     - name: Enable Flathub Repositorio
       command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    - name: Install Flatpak Spotify
-      command: flatpak install --assumeyes flathub com.spotify.Client
-    - name: Install Discord
-      command: flatpak install --assumeyes flathub com.discordapp.Discord
-    - name: Install ExtensionManager
-      command: flatpak install --assumeyes flathub com.mattjakeman.ExtensionManager
-    - name: Install Drawio
-      command: flatpak install --assumeyes flathub com.jgraph.drawio.desktop
-    - name: Install Obsidian
-      command: flatpak install --assumeyes flathub md.obsidian.Obsidian
-    - name: Install Arduino IDE2
-      command: flatpak install --assumeyes flathub cc.arduino.IDE2
-    - name: Install Remmina
-      command: flatpak install --assumeyes flathub org.remmina.Remmina
-    - name: Install Anydesk
-      command: flatpak install --assumeyes flathub com.anydesk.Anydesk
-
+    - name: Install Flatpak Apps
+      command: flatpak install --assumeyes flathub name={{item}}
+      loop:
+        - com.spotify.Client
+        - com.discordapp.Discord
+        - com.mattjakeman.ExtensionManager
+        - com.jgraph.drawio.desktop
+        - md.obsidian.Obsidian
+        - com.discordapp.Discord
+        - cc.arduino.IDE2
+        - org.remmina.Remmina
+        - com.anydesk.Anydesk
+        
   - block:
     - name: Install Microsoft Key
       apt_key:
