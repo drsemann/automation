@@ -1,0 +1,13 @@
+- name: Install Virtualization
+  package: name={{item}}
+  loop:
+    - qemu-kvm
+    - libvirt-daemon-system
+    - virt-manager
+    - virt-viewer
+
+- name: Adding existing user to group libvirt
+  user: 
+    name: '{{ ansible_user_id }}'
+    groups: libvirt 
+    append: yes
