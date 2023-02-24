@@ -65,7 +65,7 @@
         flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
         
     - name: Install Flatpak packages
-      flatpak:
+      community.general.flatpak:
         name:
           - com.spotify.Client 
           - com.discordapp.Discord 
@@ -75,7 +75,8 @@
           - com.discordapp.Discord 
           - cc.arduino.IDE2 
           - org.remmina.Remmina 
-          - com.anydesk.Anydesk 
+          - com.anydesk.Anydesk
+        state: present      
 
   - block:
     - name: Install Microsoft Key
