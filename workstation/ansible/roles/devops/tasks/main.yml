@@ -1,0 +1,69 @@
+- name: Install Microsoft Key
+  apt_key:
+    url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    state: present
+- name: Install VSCode Repository
+  apt_repository:
+    repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main'
+    state: present
+    filename: vscode
+- name: Install Visual Studio Code
+  apt:
+    name: code
+
+- name: Install Terraform Key
+  apt_key:
+    url: 'https://apt.releases.hashicorp.com/gpg'
+    keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    state: present
+- name: Install Hashicorp Repository
+  apt_repository:
+    repo: 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main'
+    state: present
+    filename: hashicorp
+- name: Install Terraform
+  apt:
+    name: terraform
+- name: Install Packer
+  apt:
+    name: packer
+
+- name: Install Docker Key
+  apt_key:
+    url: 'https://download.docker.com/linux/ubuntu/gpg'
+    keyring: /usr/share/keyrings/docker.gpg
+    state: present
+- name: Install Docker Repository
+  apt_repository:
+    repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+    state: present
+    filename: docker
+- name: Install Docker
+  apt:
+    name: "{{item}}"
+    state: latest
+    update_cache: yes
+    loop:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+- name: Adding existing user to group Docker
+  user: 
+    name: '{{ ansible_user_id }}'
+    groups: docker 
+    append: yes
+
+- name: Install Kubernetes Key
+  apt_key:
+    url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+    keyring: /etc/apt/keyrings/kubernetes-archive-keyring.gpg
+    state: present
+- name: Install Brave Repository
+  apt_repository:
+    repo: 'deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main'
+    state: present
+    filename: kubernetes
+- name: Install Kubectl
+  apt:
+    name: kubectl

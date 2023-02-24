@@ -1,0 +1,15 @@
+- name: update and upgrade Debian
+  apt: 
+    name: '*'
+    state: latest        
+    update_cache: yes
+    only_upgrade: yes
+  when: ansible_os_family == 'Debian'
+
+- name: upgrade all packages Centos
+  yum: 
+    name: '*' 
+    state: latest
+    update_cache: yes
+    update_only: yes
+  when: ansible_os_family == 'RedHat'

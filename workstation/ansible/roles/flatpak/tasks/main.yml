@@ -1,0 +1,45 @@
+- name: Add the flathub repository
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        
+- name: install Spotify via flatpak
+  community.general.flatpak:
+    name: com.spotify.Client
+    state: present
+
+- name: install Discord via flatpak
+  community.general.flatpak:
+    name: com.discordapp.Discord
+    state: present
+
+- name: install ExtensionManager via flatpak
+  community.general.flatpak:
+    name: com.mattjakeman.ExtensionManager
+    state: present
+
+- name: install Draw.io via flatpak
+  community.general.flatpak:
+    name: com.jgraph.drawio.desktop
+    state: present
+
+- name: install Obsidian via flatpak
+  community.general.flatpak:
+    name: md.obsidian.Obsidian
+    state: present
+
+- name: install ArduinoIDE2 via flatpak
+  community.general.flatpak:
+    name: cc.arduino.IDE2
+    state: present
+
+- name: install Remmina via flatpak
+  community.general.flatpak:
+    name: org.remmina.Remmina
+    state: present
+
+- name: install Anydesk via flatpak
+  community.general.flatpak:
+    name: com.anydesk.Anydesk
+    state: present
