@@ -58,9 +58,12 @@
       - gnome-tweaks
 
   - block:
-    - name: Enable Flathub Repositorio
-      command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    
+    - name: Add the flathub repository
+      flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+        
     - name: Install Flatpak packages
       flatpak:
         name:
