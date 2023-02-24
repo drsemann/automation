@@ -12,6 +12,15 @@
   apt:
     name: code
 
+- name: Install Azure Repository
+  apt_repository:
+    repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main'
+    state: present
+    filename: azure-cli
+- name: Install Azure Cli
+  apt:
+    name: azure-cli
+
 - name: Install Terraform Key
   apt_key:
     url: 'https://apt.releases.hashicorp.com/gpg'
