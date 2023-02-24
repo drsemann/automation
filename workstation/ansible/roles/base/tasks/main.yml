@@ -37,3 +37,4 @@
     - zsh-syntax-highlighting
     - gnome-tweaks
     - vagrant
+    - awscli
