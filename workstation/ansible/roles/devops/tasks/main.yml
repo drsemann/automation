@@ -40,7 +40,7 @@
     filename: docker
 - name: Install Docker
   apt:
-    name: "{{item}}"
+    name: name={{item}}
     state: latest
     update_cache: yes
     loop:
