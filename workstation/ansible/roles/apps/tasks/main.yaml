@@ -39,7 +39,7 @@
 
 - name: Add WineHQ repository
   apt_repository:
-    repo: deb https://dl.winehq.org/wine-builds/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} main
+    repo: 'deb https://dl.winehq.org/wine-builds/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} main'
     register: wine_winehq_repo_debian
 
 - name: Update the Apt cache
