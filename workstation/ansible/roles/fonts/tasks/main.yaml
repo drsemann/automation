@@ -1,3 +1,6 @@
+- name: Create folder fonts
+  creates: /home/{{ansible_user_id}}/.local/share/fonts
+
 - name: Installing FiraCode Font
   unarchive:
     src: 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip'
