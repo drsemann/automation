@@ -5,9 +5,9 @@
   roles:
   #  - update
   #  - base
-  #  - apps
+    - apps
   #  - devops
   #  - flatpak
   #  - virtualization
   #  - shell
-     - fonts
+  #   - fonts
