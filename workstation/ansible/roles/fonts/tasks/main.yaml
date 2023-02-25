@@ -6,8 +6,21 @@
       group: '{{ansible_user_id}}'
       mode: '0775'
 
-- name: Installing FiraCode Font
+- name: Installing NerdFonts
   unarchive:
-    src: 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip'
+    src: '{{item}}'
     dest: /home/{{ansible_user_id}}/.local/share/fonts
     remote_src: yes
+  with_items: 
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Hack.zip
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Inconsolata.zip
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Ubuntu.zip
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/UbuntuMono.zip
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/ProFont.zip
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Meslo.zip
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/SourceCodePro.zip
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip    
+
+- name: Refresh font cache
+  shell: fc-cache -vf
