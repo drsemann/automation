@@ -1,5 +1,10 @@
 - name: Create folder fonts
-  creates: /home/{{ansible_user_id}}/.local/share/fonts
+  file:
+      path: /home/{{ansible_user_id}}/.local/share/fonts
+      state: directory
+      owner: {{ansible_user_id}}
+      group: {{ansible_user_id}}
+      mode: 0775
 
 - name: Installing FiraCode Font
   unarchive:
