@@ -39,5 +39,4 @@
     - vagrant
     - awscli
     - tilix
-    - kubernetes-client
     - azure-cli
