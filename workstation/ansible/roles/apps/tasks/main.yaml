@@ -30,7 +30,6 @@
     name: eve-ng-integration
 
 - name: Enable 32 bit packages
-  when: winehq_enable_32bit_arch
   command: dpkg --add-architecture i386
 
 - name: Add apt key to trust apt repo  
