@@ -66,7 +66,7 @@
     url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
     keyring: /etc/apt/keyrings/kubernetes-archive-keyring.gpg
     state: present
-- name: Install Brave Repository
+- name: Install Kubernetes Repository
   apt_repository:
     repo: 'deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main'
     state: present
