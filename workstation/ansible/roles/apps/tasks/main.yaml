@@ -39,7 +39,7 @@
 
 - name: Add apt repo
   apt_repository:
-    repo: 'deb [arch=amd64,i386 signed-by=/etc/apt/keyrings/winehq-archive.key]https://dl.winehq.org/wine-builds/ubuntu jammy main'
+    repo: 'deb [arch=amd64,i386 signed-by=/etc/apt/keyrings/winehq-archive.key] https://dl.winehq.org/wine-builds/ubuntu {{ ansible_distribution_release }} main'
     state: present
 
 - name: Install winehq packages
