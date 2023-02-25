@@ -1,0 +1,26 @@
+---
+- name: Get starship install script
+  get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/starship_install.sh
+    mode: '0755'
+
+- name: Install starship
+  shell:
+    cmd: /tmp/starship_install.sh --yes
+    executable: /bin/sh
+
+- name: Copy starship config
+  copy:
+    src: starship.toml
+    dest: /home/{{ansible_user_id}}/.config/starship.toml
+
+- name: Copy bashrc
+  copy:
+    src: bashrcUbuntu
+    dest: /home/{{ansible_user_id}}/.bashrc
+
+- name: Copy zshrc
+  copy:
+    src: zshrcUbuntu
+    dest: /home/{{ansible_user_id}}/.zshrc

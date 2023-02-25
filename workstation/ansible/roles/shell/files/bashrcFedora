@@ -1,0 +1,63 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f "$rc" ]; then
+			. "$rc"
+		fi
+	done
+fi
+
+unset rc
+
+# Custom Alias
+export LS_OPTIONS='--color=auto'
+eval "`dircolors`"
+alias ls='exa --icons'
+alias ll='ls $LS_OPTIONS -l'
+alias l='ls $LS_OPTIONS -lha'
+
+alias grep='grep --color'
+alias egrep='egrep --color'
+alias ip='ip -c'
+alias diff='diff --color'
+alias meuip='curl ifconfig.me; echo;'
+alias tail='grc tail'
+alias ping='grc ping'
+alias ps='grc ps'
+alias netstat='grc netstat'
+alias dig='grc dig'
+alias traceroute='grc traceroute'
+alias dnfu='sudo dnf update -y'
+alias dnfi='sudo dnf install -y'
+alias dnfr='sudo dnf remove -y'
+alias dnfs='sudo dnf search'
+alias dnfc='sudo dnf clean all'
+alias ifconfig='grc ifconfig'
+alias vim='nvim'
+alias l='ls -lh'
+alias la='ls -lha'
+
+## Vte
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
+
+# Starship Prompt
+eval "$(starship init bash)"
