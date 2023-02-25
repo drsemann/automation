@@ -11,3 +11,11 @@
 - name: Install Brave
   apt:
     name: brave-browser
+
+- name: Install OnlyOffice
+  apt:
+    deb: https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
+
+- name: Install Bitwarden
+  apt:
+    deb: https://github.com/bitwarden/clients/releases/download/desktop-v2023.2.0/Bitwarden-2023.2.0-amd64.deb
