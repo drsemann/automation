@@ -39,7 +39,7 @@
 
 - name: Add apt repo
   apt_repository:
-    repo: https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources
+    repo: 'deb https://dl.winehq.org/wine-builds/ubuntu jammy main'
     state: present
 
 - name: Install winehq packages
