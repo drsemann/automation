@@ -3,11 +3,11 @@
   connection: localhost
   become: true
   roles:
-  #  - update
-  #  - base
-  #  - apps
-  #  - devops
-  #  - flatpak
-  #  - virtualization
-  #  - shell
+    - update
+    - base
+    - apps
+    - devops
+    - flatpak
+    - virtualization
+    - shell
     - fonts
