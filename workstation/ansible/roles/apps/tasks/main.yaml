@@ -19,3 +19,12 @@
 - name: Install Bitwarden
   apt:
     deb: https://github.com/bitwarden/clients/releases/download/desktop-v2023.2.0/Bitwarden-2023.2.0-amd64.deb
+
+- name: Add repo PPA Eve-Integration
+  ansible.builtin.apt_repository:
+    repo: 'ppa:smartfinn/eve-ng-integration'
+    codename: '{{ ansible_distribution_release }}'
+
+- name: Install Eve-Integration
+  apt:
+    name: eve-ng-integration
