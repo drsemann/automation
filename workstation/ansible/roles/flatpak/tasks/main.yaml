@@ -43,3 +43,8 @@
   flatpak:
     name: com.anydesk.Anydesk
     state: present
+
+- name: install Telegram via flatpak
+  flatpak:
+    name: org.telegram.desktop
+    state: present 
