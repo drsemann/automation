@@ -1,0 +1,5 @@
+- name: Installing FiraCode Font
+  unarchive:
+    src: 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip'
+    dest: /home/{{ansble_user_id}}/.local/share/fonts
+    remote_src: yes
