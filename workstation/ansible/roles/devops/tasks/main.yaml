@@ -74,3 +74,12 @@
 - name: Install Kubectl
   apt:
     name: kubectl
+
+- name: Install Kubectx Repository
+  apt_repository:
+    repo: 'deb [trusted=yes] http://ftp.de.debian.org/debian buster main'
+    state: present
+    filename: kubectx
+- name: Install Kubectx
+  apt:
+    name: kubectx
