@@ -19,8 +19,14 @@
   copy:
     src: bashrcUbuntu
     dest: /home/{{ansible_user_id}}/.bashrc
+    mode: '0644'
+    owner: '{{ansible_user_id}}'
+    group: '{{ansible_user_id}}'
 
 - name: Copy zshrc
   copy:
     src: zshrcUbuntu
     dest: /home/{{ansible_user_id}}/.zshrc
+    mode: '0644'
+    owner: '{{ansible_user_id}}'
+    group: '{{ansible_user_id}}'
