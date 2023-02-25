@@ -30,3 +30,16 @@
     mode: '0644'
     owner: '{{ansible_user_id}}'
     group: '{{ansible_user_id}}'
+
+- name: Create folder Tilix schemes
+  file:
+      path: /home/{{ansible_user_id}}/.config/tilix/schemes
+      state: directory
+      owner: '{{ansible_user_id}}'
+      group: '{{ansible_user_id}}'
+      mode: '0775'
+
+- name: Clone repository scheme Tilix
+  git:
+    repo: https://codeberg.org/SnowCode/tilix-colors.git
+    dest: /home/{{ansible_user_id}}/.config/tilix/schemes/
