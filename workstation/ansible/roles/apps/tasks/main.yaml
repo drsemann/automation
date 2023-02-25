@@ -28,28 +28,3 @@
 - name: Install Eve-Integration
   apt:
     name: eve-ng-integration
-
-- name: Enable 32 bit packages
-  command: dpkg --add-architecture i386
-
-- name: Add WineHQ GPG repostiory key
-  apt_key:
-    url: https://dl.winehq.org/wine-builds/winehq.key
-    keyring: /etc/apt/trusted.gpg.d/winehq.gpg
-
-- name: Add WineHQ repository
-  apt_repository:
-    repo: 'deb https://dl.winehq.org/wine-builds/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} main'
-    register: wine_winehq_repo_debian
-
-- name: Update the Apt cache
-  apt:
-    update_cache: yes
-    when: wine_winehq_repo_debian.changed
-
-- name: Install winehq packages
-  apt:
-    name: winehq-stable
-    state: present
-    update_cache: yes
-    install_recommends: yes
