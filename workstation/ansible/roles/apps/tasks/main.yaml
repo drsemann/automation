@@ -28,3 +28,7 @@
 - name: Install Eve-Integration
   apt:
     name: eve-ng-integration
+
+- name: Install minikube
+  apt:
+    deb: https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
