@@ -1,3 +1,4 @@
+---
 - name: Install Brave Key
   apt_key:
     url: 'https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg'
@@ -28,3 +29,5 @@
 - name: Install Eve-Integration
   apt:
     name: eve-ng-integration
+
+...

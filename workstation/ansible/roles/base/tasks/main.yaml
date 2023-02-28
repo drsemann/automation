@@ -1,3 +1,4 @@
+---
 - name: Install packages base
   package: name={{item}}
   loop:
@@ -39,3 +40,4 @@
     - vagrant
     - awscli
     - tilix
+...

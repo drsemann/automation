@@ -43,3 +43,4 @@
   git:
     repo: https://codeberg.org/SnowCode/tilix-colors.git
     dest: /home/{{ansible_user_id}}/.config/tilix/schemes/
+...

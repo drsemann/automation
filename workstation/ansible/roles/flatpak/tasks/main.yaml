@@ -1,3 +1,4 @@
+---
 - name: Add the flathub repository
   flatpak_remote:
     name: flathub
@@ -47,4 +48,10 @@
 - name: install Telegram via flatpak
   flatpak:
     name: org.telegram.desktop
-    state: present 
+    state: present
+
+- name: Install Dropbox via flatpak
+  flatpak:
+    name: com.dropbox.Client
+    state: present
+...

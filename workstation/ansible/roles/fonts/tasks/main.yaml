@@ -1,3 +1,4 @@
+---
 - name: Create folder fonts
   file:
       path: /home/{{ansible_user_id}}/.local/share/fonts
@@ -24,3 +25,5 @@
 
 - name: Refresh font cache
   shell: fc-cache -vf
+
+...
