@@ -61,16 +61,34 @@
     groups: docker 
     append: yes
 
-#- name: Install Kubernetes Key
-#  apt_key:
-#    url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
-#    keyring: /etc/apt/keyrings/kubernetes-archive-keyring.gpg
-#    state: present
-#- name: Install Kubernetes Repository
-#  apt_repository:
-#    repo: 'deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main'
-#    state: present
-#    filename: kubernetes
-#- name: Install Kubectl
-#  apt:
-#    name: kubectl
+- name: Install Kubernetes Key
+  apt_key:
+    url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+    keyring: /etc/apt/keyrings/kubernetes-archive-keyring.gpg
+    state: present
+- name: Install Kubernetes Repository
+  apt_repository:
+    repo: 'deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main'
+    state: present
+    filename: kubernetes
+- name: Install Kubectl
+  apt:
+    name: kubectl
+
+- name: Install Helm Key
+  apt_key:
+    url: 'https://baltocdn.com/helm/signing.asc'
+    keyring: /etc/apt/keyrings/helm.gpg
+    state: present
+- name: Install Helm Repository
+  apt_repository:
+    repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main'
+    state: present
+    filename: helm
+- name: Install Helm
+  apt:
+    name: helm
+
+- name: Install minikube
+  apt:
+    deb: https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
