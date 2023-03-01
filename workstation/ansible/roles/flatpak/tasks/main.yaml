@@ -1,57 +1,57 @@
 ---
 - name: Add the flathub repository
-  ansible.builtin.flatpak_remote:
+  community.general.flatpak_remote:
     name: flathub
     state: present
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
         
 - name: install Spotify via flatpak
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: com.spotify.Client
     state: present
 
 - name: install Discord via flatpak
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: com.discordapp.Discord
     state: present
 
 - name: install ExtensionManager via flatpak
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: com.mattjakeman.ExtensionManager
     state: present
 
 - name: install Draw.io via flatpak
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: com.jgraph.drawio.desktop
     state: present
 
 - name: install Obsidian via flatpak
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: md.obsidian.Obsidian
     state: present
 
 - name: install ArduinoIDE2 via flatpak
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: cc.arduino.IDE2
     state: present
 
 - name: install Remmina via flatpak
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.remmina.Remmina
     state: present
 
 - name: install Anydesk via flatpak
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: com.anydesk.Anydesk
     state: present
 
 - name: install Telegram via flatpak
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.telegram.desktop
     state: present
 
 - name: Install Dropbox via flatpak
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: com.dropbox.Client
     state: present
 ...
