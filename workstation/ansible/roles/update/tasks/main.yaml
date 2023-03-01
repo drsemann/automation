@@ -1,6 +1,6 @@
 ---
 - name: update and upgrade Debian
-  apt: 
+  ansible.builtin.apt: 
     name: '*'
     state: latest        
     update_cache: yes
@@ -8,7 +8,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: upgrade all packages Centos
-  yum: 
+  ansible.builtin.yum: 
     name: '*' 
     state: latest
     update_cache: yes

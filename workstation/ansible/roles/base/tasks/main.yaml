@@ -1,7 +1,7 @@
 ---
 - name: Install packages base
-  package: name={{item}}
-  loop:
+  ansible.builtin.package: name={{item}}
+  with_items:
     - htop
     - iotop
     - iftop

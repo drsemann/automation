@@ -2,7 +2,7 @@
 - hosts: localhost
   connection: localhost
   become: true
-  roles:
+  ansible.builtin.roles:
     - update
     - base
     - apps

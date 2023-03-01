@@ -1,6 +1,6 @@
 ---
 - name: Create folder fonts
-  file:
+  ansible.builtin.file:
       path: /home/{{ansible_user_id}}/.local/share/fonts
       state: directory
       owner: '{{ansible_user_id}}'
@@ -8,7 +8,7 @@
       mode: '0775'
 
 - name: Installing NerdFonts
-  unarchive:
+  ansible.builtin.unarchive:
     src: '{{item}}'
     dest: /home/{{ansible_user_id}}/.local/share/fonts
     remote_src: yes
@@ -24,6 +24,6 @@
     - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip    
 
 - name: Refresh font cache
-  shell: fc-cache -vf
+  ansible.builtin.shell: fc-cache -vf
 
 ...

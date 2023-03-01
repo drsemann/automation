@@ -1,97 +1,97 @@
 ---
 - name: Install Microsoft Key
-  apt_key:
+  ansible.builtin.apt_key:
     url: 'https://packages.microsoft.com/keys/microsoft.asc'
     keyring: /usr/share/keyrings/packages.microsoft.gpg
     state: present
 - name: Install VSCode Repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main'    
     state: present
     filename: vscode
 - name: Install Visual Studio Code
-  apt:
+  ansible.builtin.apt:
     name: code
 
 - name: Install Azure Repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main'
     state: present
     filename: azure-cli
 - name: Install Azure Cli
-  apt:
+  ansible.builtin.apt:
     name: azure-cli
 
 - name: Install Terraform Key
-  apt_key:
+  ansible.builtin.apt_key:
     url: 'https://apt.releases.hashicorp.com/gpg'
     keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
     state: present
 - name: Install Hashicorp Repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main'
     state: present
     filename: hashicorp
 - name: Install Terraform
-  apt:
+  ansible.builtin.apt:
     name: terraform
 - name: Install Packer
-  apt:
+  ansible.builtin.apt:
     name: packer
 
 - name: Install Docker Key
-  apt_key:
+  ansible.builtin.apt_key:
     url: 'https://download.docker.com/linux/ubuntu/gpg'
     keyring: /usr/share/keyrings/docker.gpg
     state: present
 - name: Install Docker Repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
     state: present
     filename: docker
 - name: Install Docker
-  apt:
+  ansible.builtin.apt:
     package:
       - docker-ce
       - docker-ce-cli
       - containerd.io
       - docker-compose-plugin      
 - name: Adding existing user to group Docker
-  user: 
+  ansible.builtin.user: 
     name: '{{ ansible_user_id }}'
     groups: docker 
     append: yes
 
 - name: Install Kubernetes Key
-  apt_key:
+  ansible.builtin.apt_key:
     url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
     keyring: /etc/apt/keyrings/kubernetes-archive-keyring.gpg
     state: present
 - name: Install Kubernetes Repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main'
     state: present
     filename: kubernetes
 - name: Install Kubectl
-  apt:
+  ansible.builtin.apt:
     name: kubectl
 
 - name: Install Helm Key
-  apt_key:
+  ansible.builtin.apt_key:
     url: 'https://baltocdn.com/helm/signing.asc'
     keyring: /etc/apt/keyrings/helm.gpg
     state: present
 - name: Install Helm Repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [arch=amd64 signed-by=/etc/apt/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main'
     state: present
     filename: helm
 - name: Install Helm
-  apt:
+  ansible.builtin.apt:
     name: helm
 
 - name: Install minikube
-  apt:
+  ansible.builtin.apt:
     deb: https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
 
 ...
