@@ -16,7 +16,7 @@
     state: present
 
 - name: install ExtensionManager via flatpak
-  ansible.builtin.latpak:
+  ansible.builtin.flatpak:
     name: com.mattjakeman.ExtensionManager
     state: present
 
