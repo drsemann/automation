@@ -40,4 +40,5 @@
     - vagrant
     - awscli
     - tilix
+    - onedrive
 ...

@@ -1,11 +1,19 @@
 ---
-- name: Install Virtualization
+
+- name: Install Virtualization (Debian)
   ansible.builtin.package: name={{item}}
-  loop:
+  with_items:
     - qemu-kvm
     - libvirt-daemon-system
     - virt-manager
     - virt-viewer
+  when: ansible_os_family == 'Debian'
+
+- name: Install Virtualization (Redhat)
+  ansible.builtin.package:
+    name: '@virtualization'
+    state: present
+  when: ansible_os_family == 'RedHat'
 
 - name: Adding existing user to group libvirt
   ansible.builtin.user: 
