@@ -30,8 +30,8 @@
 
 - name: "Manage physical bridge Member"
   community.general.nmcli:
-     conn_name: "ens18"
-     ifname: "ens18"
+     conn_name: "{{ interface_bridge }}"
+     ifname: "{{ interface_bridge }}"
      type: "bridge-slave"
      master: "br0"
      state: "present"
