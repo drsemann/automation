@@ -41,6 +41,7 @@
   loop:
     - terraform
     - packer
+    - vault
 
 - name: Install Kubectl
   ansible.builtin.dnf:
