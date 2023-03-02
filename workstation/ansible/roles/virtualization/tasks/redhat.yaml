@@ -59,4 +59,9 @@
   community.libvirt.virt_net:
     command: create
     name: "bridge"
+
+- name: Ensure that a given network will be started at boot
+  community.libvirt.virt_net:
+    autostart: yes
+    name: "bridge"
 ...
