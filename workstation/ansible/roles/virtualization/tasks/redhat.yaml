@@ -54,4 +54,9 @@
      command: "define"
      name: "bridge"
      xml: "{{ lookup('template','libvirt_net_bridge.xml.j2') }}"
+
+- name: Start a network
+  community.libvirt.virt_net:
+    command: create
+    name: "bridge"
 ...
