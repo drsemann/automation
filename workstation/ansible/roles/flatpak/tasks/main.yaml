@@ -1,9 +1,6 @@
 ---
 - name: Add the flathub repository
-  community.general.flatpak_remote:
-    name: flathub
-    state: present
-    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+  ansible.builtin.command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         
 - name: install Spotify via flatpak
   community.general.flatpak:
