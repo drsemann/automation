@@ -1,0 +1,8 @@
+---
+# Global varaible use in some roles
+
+ansible_user_id:
+
+interface_bridge:
+
+...
