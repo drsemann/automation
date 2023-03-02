@@ -1,23 +1,9 @@
 ---
-
-- name: Install Virtualization (Debian)
-  ansible.builtin.package: name={{item}}
-  with_items:
-    - qemu-kvm
-    - libvirt-daemon-system
-    - virt-manager
-    - virt-viewer
-  when: ansible_os_family == 'Debian'
-
-- name: Install Virtualization (Redhat)
-  ansible.builtin.package:
-    name: '@virtualization'
-    state: present
+- name: Performing Tasks for Redhat Like
+  include_tasks: redhat.yaml
   when: ansible_os_family == 'RedHat'
 
-- name: Adding existing user to group libvirt
-  ansible.builtin.user: 
-    name: '{{ ansible_user_id }}'
-    groups: libvirt 
-    append: yes
+- name: Performing Tasks for Debian Like
+  include_tasks: debian.yaml
+  when: ansible_os_family == 'Debian'
 ...

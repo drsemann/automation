@@ -1,0 +1,23 @@
+---
+- name: Install virtualization Group
+  ansible.builtin.dnf:
+    name: '@virtualization'
+    state: present
+
+- name: Configure libvirtd.conf - 1
+  ansible.builtin.command: sed -i '/unix_sock_group/s/^# *//' /etc/libvirt/libvirtd.conf
+
+- name: Configure libvirtd.conf - 2
+  ansible.builtin.command: sed -i '/unix_sock_rw_perms/s/^# *//' /etc/libvirt/libvirtd.conf
+
+- name: "Manage Virtualization Services"
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: "started"
+    enabled: true
+  become: true
+  loop:
+    - "virtqemud.service"
+    - "virtnetworkd.service"
+    - "libvirtd.service"
+...
