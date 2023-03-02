@@ -25,4 +25,37 @@
     - "virtqemud.service"
     - "virtnetworkd.service"
     - "libvirtd.service"
+
+- name: "Manage network Packages"
+  ansible.builtin.package:
+     name:
+       - "bridge-utils"
+       - "python-lxml"
+     state: "present"
+
+- name: "Manage physical bridge Device"
+  community.general.nmcli:
+     type: "bridge"
+     conn_name: "br0"
+     ifname: "br0"
+     stp: true
+     state: "present"
+  notify:
+     - "Restart system"
+
+- name: "Manage physical bridge Member"
+  community.general.nmcli:
+     conn_name: "ens18"
+     ifname: "ens18"
+     type: "bridge-slave"
+     master: "br0"
+     state: "present"
+  notify:
+     - "Restart system"
+  
+- name: "Manage virtual bridge Network"
+  community.libvirt.virt_net:
+     command: "define"
+     name: "bridge"
+     xml: "{{ lookup('template','libvirt_net_bridge.xml.j2') }}"
 ...
