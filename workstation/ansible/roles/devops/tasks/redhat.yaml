@@ -26,7 +26,8 @@
 
 - name: Add Repository Hashicorp
   yum_repository:
-    name: Hashicorp Stable - $basearch
+    name: hashicorp-stable
+    description: Hashicorp Softwares
     baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
     enabled: yes
     gpgcheck: yes
