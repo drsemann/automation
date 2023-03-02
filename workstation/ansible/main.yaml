@@ -6,7 +6,7 @@
     #- update
     #- base
     #- apps
-    - devops
+    #- devops
     #- flatpak
     #- virtualization
     - shell
