@@ -43,4 +43,12 @@
   ansible.builtin.git:
     repo: https://codeberg.org/SnowCode/tilix-colors.git
     dest: /home/{{ansible_user_id}}/.config/tilix/schemes/
+
+- name: Copy micro configs
+  unarchive:
+    src: micro.zip
+    dest: /home/{{ansible_user_id}}/.config/
+    mode: '0644'
+    owner: '{{ansible_user_id}}'
+    group: '{{ansible_user_id}}' 
 ...
