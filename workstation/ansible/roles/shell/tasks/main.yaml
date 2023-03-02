@@ -15,17 +15,6 @@
     - '/home/{{ansible_user_id}}/Documentos/Projetos/vagrant'
     - '/home/{{ansible_user_id}}/Documentos/Projetos/docker'
 
-- name: Clone repository
-  ansible.builtin.git:
-    repo: '{{ item }}'
-    dest: /home/{{ansible_user_id}}/Documentos/Projetos/git/
-  loop:    
-    - 'https://github.com/drsemann/drsemann.github.io.git'
-    - 'https://github.com/drsemann/sysadmin.git'
-    - 'https://github.com/drsemann/playbooks.git'
-    - 'https://github.com/drsemann/dotfiles.git'
-    - 'https://github.com/drsemann/automation.git'
-
 - name: Performing Tasks for Redhat Like
   include_tasks: redhat.yaml
   when: ansible_os_family == 'RedHat'
