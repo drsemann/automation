@@ -1,10 +1,42 @@
 ---
-- name: RPM Fusion Repository
-  ansible.builtin.dnf:
-    name: "{{ item }}"
+- name: Add RPMFusion keys 
+  ansible.builtin.rpm_key:
     state: present
-    with_items:
-      - 'https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm'
-      - 'https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm'
+    key: '{{item}}'
+  loop:
+    - 'https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020'
+    - 'https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020'
+  
+- name: Install repositories RPMFusion
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - 'https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm'
+    - 'https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm'
 
+- name: Install Dropbox
+  ansible.builtin.dnf:
+    name: 'https://linux.dropbox.com/packages/fedora/nautilus-dropbox-2020.03.04-1.fedora.x86_64.rpm'
+    state: present
+
+- name: Install Bitwarden
+  ansible.builtin.dnf:
+    name: 'https://github.com/bitwarden/clients/releases/download/desktop-v2023.2.0/Bitwarden-2023.2.0-x86_64.rpm'
+    state: present
+
+- name: Add Brave Repository Keys
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+
+- name: Add repositories Brave
+  ansible.builtin.yum_repository:
+    name: Brave Repository
+    baseurl: https://brave-browser-rpm-release.s3.brave.com/x86_64/
+
+- name: Install Brave
+  ansible.builtin.dnf:
+    name: brave-browser
+    state: present
 ...

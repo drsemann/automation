@@ -3,8 +3,8 @@
   connection: localhost
   become: true
   roles:
-    - update
-    - base
+    #- update
+    #- base
     - apps
     #- devops
     #- flatpak
