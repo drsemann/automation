@@ -18,4 +18,48 @@
   ansible.builtin.dnf:
     name: code
     state: present
+
+- name: Add Hashicorp Repository Keys
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://rpm.releases.hashicorp.com/gpg
+
+- name: Add Repository Hashicorp
+  yum_repository:
+    name: Hashicorp Stable - $basearch
+    baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://rpm.releases.hashicorp.com/gpg
+    state: present
+
+- name: Install Terrafor and Packer
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - terraform
+    - packer
+
+- name: Install Kubectl
+  ansible.builtin.dnf:
+    name: kubernetes-client
+    state: present
+
+- name: Install Kubeadm
+  ansible.builtin.dnf:
+    name: kubernetes-kubeadm
+    state: present
+
+- name: Install miniKube
+  ansible.builtin.dnf:
+    name: 'https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm'
+    state: present
+    disable_gpg_check: true
+
+- name: Install Helm
+  ansible.builtin.dnf:
+    name: helm
+    state: present
+
 ...
