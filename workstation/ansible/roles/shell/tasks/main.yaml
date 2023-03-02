@@ -19,8 +19,7 @@
   ansible.builtin.git:
     repo: '{{ item }}'
     dest: /home/{{ansible_user_id}}/Documentos/Projetos/git/
-  loop:
-    - 'https://github.com/drsemann/wiki.git'
+  loop:    
     - 'https://github.com/drsemann/drsemann.github.io.git'
     - 'https://github.com/drsemann/sysadmin.git'
     - 'https://github.com/drsemann/playbooks.git'
