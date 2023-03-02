@@ -1,4 +1,20 @@
 ---
+- name: Ensure default directories in home
+  file:
+    path: '{{item}}'
+    state: directory
+    mode: '0700'
+    owner: '{{ansible_user_id}}'
+    group: '{{ansible_user_id}}'
+  loop:
+    - '/home/{{ansible_user_id}}/Documentos/Projetos'
+    - '/home/{{ansible_user_id}}/Documentos/Projetos/ansible'
+    - '/home/{{ansible_user_id}}/Documentos/Projetos/git'
+    - '/home/{{ansible_user_id}}/Documentos/Projetos/terraform'
+    - '/home/{{ansible_user_id}}/Documentos/Projetos/treinamentos'
+    - '/home/{{ansible_user_id}}/Documentos/Projetos/vagrant'
+    - '/home/{{ansible_user_id}}/Documentos/Projetos/docker'
+
 - name: Performing Tasks for Redhat Like
   include_tasks: redhat.yaml
   when: ansible_os_family == 'RedHat'
