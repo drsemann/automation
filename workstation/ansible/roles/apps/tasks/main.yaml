@@ -1,33 +1,9 @@
 ---
-- name: Install Brave Key
-  ansible.builtin.apt_key:
-    url: 'https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg'
-    keyring: /usr/share/keyrings/brave-browser-archive-keyring.gpg
-    state: present
-- name: Install Brave Repository
-  ansible.builtin.apt_repository:
-    repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main'
-    state: present
-    filename: brave
-- name: Install Brave
-  ansible.builtin.apt:
-    name: brave-browser
+- name: Performing Tasks for Redhat Like
+  include_tasks: redhat.yaml
+  when: ansible_os_family == 'RedHat'
 
-- name: Install OnlyOffice
-  ansible.builtin.apt:
-    deb: https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
-
-- name: Install Bitwarden
-  ansible.builtin.apt:
-    deb: https://github.com/bitwarden/clients/releases/download/desktop-v2023.2.0/Bitwarden-2023.2.0-amd64.deb
-
-- name: Add repo PPA Eve-Integration
-  ansible.builtin.apt_repository:
-    repo: 'ppa:smartfinn/eve-ng-integration'
-    codename: '{{ ansible_distribution_release }}'
-
-- name: Install Eve-Integration
-  ansible.builtin.apt:
-    name: eve-ng-integration
-
+- name: Performing Tasks for Debian Like
+  include_tasks: debian.yaml
+  when: ansible_os_family == 'Debian'
 ...

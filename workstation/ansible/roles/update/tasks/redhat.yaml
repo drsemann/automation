@@ -1,5 +1,5 @@
 ---
-- name: upgrade all packages Centos
+- name: update and upgrade Redhat Like
   ansible.builtin.dnf: 
     name: '*' 
     state: latest

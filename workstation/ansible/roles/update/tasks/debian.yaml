@@ -1,5 +1,5 @@
 ---
-- name: update and upgrade Debian
+- name: update and upgrade Debian Like
   ansible.builtin.apt: 
     name: '*'
     state: latest        
