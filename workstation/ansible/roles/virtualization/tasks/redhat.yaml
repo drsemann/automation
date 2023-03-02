@@ -26,6 +26,12 @@
     - "virtnetworkd.service"
     - "libvirtd.service"
 
+- name: Adding existing user to group libvirt
+  ansible.builtin.user: 
+    name: '{{ ansible_user_id }}'
+    groups: libvirt 
+    append: yes
+
 - name: "Manage network Packages"
   ansible.builtin.package:
      name:
