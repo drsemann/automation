@@ -4,6 +4,11 @@
     name: '@virtualization'
     state: present
 
+- name: Install libvirt
+  ansible.builtin.dnf:
+    name: libvirt
+    state: present
+
 - name: Configure libvirtd.conf - 1
   ansible.builtin.command: sed -i '/unix_sock_group/s/^# *//' /etc/libvirt/libvirtd.conf
 
