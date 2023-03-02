@@ -64,9 +64,9 @@
     name: helm
     state: present
 
-- name: Install Development group
+- name: Install Development Group
   ansible.builtin.dnf:
-    name: '@development-tools'
+    name: '@development-tomicrools'
     state: present
 
 ...
