@@ -8,7 +8,7 @@
     #- apps
     #- devops
     #- flatpak
-    #- virtualization
-    - shell
+    - virtualization
+    #- shell
     #- fonts
 ...

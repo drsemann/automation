@@ -44,7 +44,7 @@
     repo: https://codeberg.org/SnowCode/tilix-colors.git
     dest: /home/{{ansible_user_id}}/.config/tilix/schemes/
 
-- name: Install micro plugin Monok
+- name: Install micro plugins
   ansible.builtin.command: '{{ item }}'
   loop:
     - 'micro -plugin install monokai-dark'
