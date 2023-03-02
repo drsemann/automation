@@ -1,0 +1,46 @@
+---
+- name: Get starship install script
+  ansible.builtin.get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/starship_install.sh
+    mode: '0755'
+
+- name: Install starship
+  ansible.builtin.shell:
+    cmd: /tmp/starship_install.sh --yes
+    executable: /bin/sh
+
+- name: Copy starship config
+  ansible.builtin.copy:
+    src: starship.toml
+    dest: /home/{{ansible_user_id}}/.config/starship.toml
+
+- name: Copy bashrc
+  ansible.builtin.copy:
+    src: bashrcUbuntu
+    dest: /home/{{ansible_user_id}}/.bashrc
+    mode: '0644'
+    owner: '{{ansible_user_id}}'
+    group: '{{ansible_user_id}}'
+
+- name: Copy zshrc
+  ansible.builtin.copy:
+    src: zshrcUbuntu
+    dest: /home/{{ansible_user_id}}/.zshrc
+    mode: '0644'
+    owner: '{{ansible_user_id}}'
+    group: '{{ansible_user_id}}'
+
+- name: Create folder Tilix schemes
+  ansible.builtin.file:
+      path: /home/{{ansible_user_id}}/.config/tilix/schemes
+      state: directory
+      owner: '{{ansible_user_id}}'
+      group: '{{ansible_user_id}}'
+      mode: '0775'
+
+- name: Clone repository scheme Tilix
+  ansible.builtin.git:
+    repo: https://codeberg.org/SnowCode/tilix-colors.git
+    dest: /home/{{ansible_user_id}}/.config/tilix/schemes/
+...
