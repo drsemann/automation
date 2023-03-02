@@ -5,8 +5,8 @@
   roles:
     #- update
     #- base
-    - apps
-    #- devops
+    #- apps
+    - devops
     #- flatpak
     #- virtualization
     #- shell
