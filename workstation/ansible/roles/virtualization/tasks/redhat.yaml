@@ -39,9 +39,7 @@
      conn_name: "br0"
      ifname: "br0"
      stp: true
-     state: "present"
-  notify:
-     - "Restart system"
+     state: "present"  
 
 - name: "Manage physical bridge Member"
   community.general.nmcli:
@@ -50,8 +48,6 @@
      type: "bridge-slave"
      master: "br0"
      state: "present"
-  notify:
-     - "Restart system"
   
 - name: "Manage virtual bridge Network"
   community.libvirt.virt_net:
