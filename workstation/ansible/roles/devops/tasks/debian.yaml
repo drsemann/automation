@@ -58,7 +58,7 @@
       - docker-compose-plugin      
 - name: Adding existing user to group Docker
   ansible.builtin.user: 
-    name: '{{ ansible_user_id }}'
+    name: '{{ host_user }}'
     groups: docker 
     append: yes
 

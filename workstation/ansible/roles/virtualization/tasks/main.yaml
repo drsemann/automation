@@ -9,7 +9,7 @@
 
 - name: Adding existing user to group libvirt
   ansible.builtin.user: 
-    name: '{{ ansible_user_id }}'
+    name: '{{ host_user }}'
     groups: libvirt 
     append: yes
 

@@ -4,16 +4,16 @@
     path: '{{item}}'
     state: directory
     mode: '0700'
-    owner: '{{ansible_user_id}}'
-    group: '{{ansible_user_id}}'
+    owner: '{{host_user}}'
+    group: '{{host_user}}'
   loop:
-    - '/home/{{ansible_user_id}}/Documentos/Projetos'
-    - '/home/{{ansible_user_id}}/Documentos/Projetos/ansible'
-    - '/home/{{ansible_user_id}}/Documentos/Projetos/git'
-    - '/home/{{ansible_user_id}}/Documentos/Projetos/terraform'
-    - '/home/{{ansible_user_id}}/Documentos/Projetos/treinamentos'
-    - '/home/{{ansible_user_id}}/Documentos/Projetos/vagrant'
-    - '/home/{{ansible_user_id}}/Documentos/Projetos/docker'
+    - '/home/{{host_user}}/Documentos/Projetos'
+    - '/home/{{host_user}}/Documentos/Projetos/ansible'
+    - '/home/{{host_user}}/Documentos/Projetos/git'
+    - '/home/{{host_user}}/Documentos/Projetos/terraform'
+    - '/home/{{host_user}}/Documentos/Projetos/treinamentos'
+    - '/home/{{host_user}}/Documentos/Projetos/vagrant'
+    - '/home/{{host_user}}/Documentos/Projetos/docker'
 
 - name: Performing Tasks for Redhat Like
   include_tasks: redhat.yaml

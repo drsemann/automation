@@ -1,7 +1,7 @@
 ---
 # Global varaible use in some roles
 
-ansible_user_id:
+host_user:
 
 interface_bridge:
 
