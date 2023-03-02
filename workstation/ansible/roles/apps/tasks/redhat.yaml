@@ -15,11 +15,6 @@
     - 'https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm'
     - 'https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm'
 
-- name: Install Dropbox
-  ansible.builtin.dnf:
-    name: 'https://linux.dropbox.com/packages/fedora/nautilus-dropbox-2020.03.04-1.fedora.x86_64.rpm'
-    state: present
-
 - name: Install Bitwarden
   ansible.builtin.dnf:
     name: 'https://github.com/bitwarden/clients/releases/download/desktop-v2023.2.0/Bitwarden-2023.2.0-x86_64.rpm'
@@ -31,12 +26,22 @@
     key: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 
 - name: Add repositories Brave
-  ansible.builtin.yum_repository:
-    name: Brave Repository
-    baseurl: https://brave-browser-rpm-release.s3.brave.com/x86_64/
+  yum_repository:
+      name: brave-browser
+      description: Brave Browser - $basearch
+      baseurl: https://brave-browser-rpm-release.s3.brave.com/x86_64/
+      enabled: yes
+      gpgcheck: yes
+      gpgkey: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+      state: present
 
 - name: Install Brave
   ansible.builtin.dnf:
     name: brave-browser
+    state: present
+
+- name: Install OnlyOffice
+  ansible.builtin.dnf:
+    name: 'https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors.x86_64.rpm'
     state: present
 ...
