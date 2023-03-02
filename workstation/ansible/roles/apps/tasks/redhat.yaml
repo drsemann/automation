@@ -19,6 +19,7 @@
   ansible.builtin.dnf:
     name: 'https://github.com/bitwarden/clients/releases/download/desktop-v2023.2.0/Bitwarden-2023.2.0-x86_64.rpm'
     state: present
+    disable_gpg_check: true
 
 - name: Add Brave Repository Keys
   ansible.builtin.rpm_key:
@@ -44,4 +45,5 @@
   ansible.builtin.dnf:
     name: 'https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors.x86_64.rpm'
     state: present
+    disable_gpg_check: true
 ...
