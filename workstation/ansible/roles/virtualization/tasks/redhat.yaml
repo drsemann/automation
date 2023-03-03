@@ -6,8 +6,14 @@
 
 - name: Install libvirt
   ansible.builtin.dnf:
-    name: libvirt
+    name: '{{ item }}'
     state: present
+  loop:
+    - libvirt
+    - libvirt-devel
+    - libxml2-devel
+    - ruby-devel
+    - libguestfs-tools
 
 - name: Configure libvirtd.conf - 1
   ansible.builtin.command: sed -i '/unix_sock_group/s/^# *//' /etc/libvirt/libvirtd.conf
@@ -25,4 +31,7 @@
     - "virtqemud.service"
     - "virtnetworkd.service"
     - "libvirtd.service"
+
+- name: Configure vagrant libvirt plugin
+  ansible.builtin.command: vagrant plugin install vagrant-libvirt
 ...

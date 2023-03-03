@@ -12,43 +12,4 @@
     name: '{{ host_user }}'
     groups: libvirt 
     append: yes
-
-- name: "Manage network Packages"
-  ansible.builtin.package:
-     name:
-       - "bridge-utils"
-       - "python-lxml"
-     state: "present"
-
-- name: "Manage physical bridge Device"
-  community.general.nmcli:
-     type: "bridge"
-     conn_name: "br0"
-     ifname: "br0"
-     stp: false
-     state: "present"  
-
-- name: "Manage physical bridge Member"
-  community.general.nmcli:
-     conn_name: "{{ interface_bridge }}"
-     ifname: "{{ interface_bridge }}"
-     type: "bridge-slave"
-     master: "br0"
-     state: "present"
-  
-- name: "Manage virtual bridge Network"
-  community.libvirt.virt_net:
-     command: "define"
-     name: "bridge"
-     xml: "{{ lookup('template','libvirt_net_bridge.xml.j2') }}"
-
-- name: Start a network
-  community.libvirt.virt_net:
-    command: create
-    name: "bridge"
-
-- name: Ensure that a given network will be started at boot
-  community.libvirt.virt_net:
-    autostart: yes
-    name: "bridge"
 ...

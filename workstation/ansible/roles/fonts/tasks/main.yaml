@@ -1,16 +1,16 @@
 ---
 - name: Create folder fonts
   ansible.builtin.file:
-      path: /home/{{ansible_user_id}}/.local/share/fonts
+      path: /home/{{host_user}}/.local/share/fonts
       state: directory
-      owner: '{{ansible_user_id}}'
-      group: '{{ansible_user_id}}'
+      owner: '{{host_user}}'
+      group: '{{host_user}}'
       mode: '0775'
 
 - name: Installing NerdFonts
   ansible.builtin.unarchive:
     src: '{{item}}'
-    dest: /home/{{ansible_user_id}}/.local/share/fonts
+    dest: /home/{{host_user}}/.local/share/fonts
     remote_src: yes
   with_items: 
     - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip
