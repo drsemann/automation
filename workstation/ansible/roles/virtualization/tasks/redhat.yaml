@@ -6,7 +6,7 @@
 
 - name: Install libvirt
   ansible.builtin.dnf:
-    name: '{{ item }}'
+    name: '{{item}}'
     state: present
   loop:
     - libvirt
@@ -23,7 +23,7 @@
 
 - name: "Manage Virtualization Services"
   ansible.builtin.service:
-    name: "{{ item }}"
+    name: "{{item}}"
     state: "started"
     enabled: true
   become: true
@@ -31,7 +31,4 @@
     - "virtqemud.service"
     - "virtnetworkd.service"
     - "libvirtd.service"
-
-- name: Configure vagrant libvirt plugin
-  ansible.builtin.command: vagrant plugin install vagrant-libvirt
 ...

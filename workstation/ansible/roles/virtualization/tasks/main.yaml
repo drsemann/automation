@@ -12,4 +12,7 @@
     name: '{{ host_user }}'
     groups: libvirt 
     append: yes
+
+- name: Configure vagrant libvirt plugin
+  ansible.builtin.command: vagrant plugin install vagrant-libvirt
 ...

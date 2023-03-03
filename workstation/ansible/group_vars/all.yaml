@@ -1,6 +1,20 @@
 ---
 # Global varaible use in some roles
 
+## Your user account
 host_user:
+
+## Link download bitwarden
+## https://github.com/bitwarden/clients/releases/ 
+## Desktop
+bitwarden_url:
+
+## Link download onlyoffice
+onlyoffice_url:
+
+## Link download minikube
+## https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm - Fedora
+## https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb - Ubuntu
+minikube_url: 
 
 ...

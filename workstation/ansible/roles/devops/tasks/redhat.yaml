@@ -55,7 +55,7 @@
 
 - name: Install miniKube
   ansible.builtin.dnf:
-    name: 'https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm'
+    name: '{{minikube_url}}'
     state: present
     disable_gpg_check: true
 

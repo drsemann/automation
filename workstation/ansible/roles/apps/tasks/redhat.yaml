@@ -15,12 +15,6 @@
     - 'https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm'
     - 'https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm'
 
-- name: Install Bitwarden
-  ansible.builtin.dnf:
-    name: 'https://github.com/bitwarden/clients/releases/download/desktop-v2023.2.0/Bitwarden-2023.2.0-x86_64.rpm'
-    state: present
-    disable_gpg_check: true
-
 - name: Add Brave Repository Keys
   ansible.builtin.rpm_key:
     state: present
@@ -43,7 +37,13 @@
 
 - name: Install OnlyOffice
   ansible.builtin.dnf:
-    name: 'https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors.x86_64.rpm'
+    name: '{{onlyoffice_url}}'
+    state: present
+    disable_gpg_check: true
+
+- name: Install Bitwarden
+  ansible.builtin.dnf:
+    name: '{{bitwarden_url}}'
     state: present
     disable_gpg_check: true
 ...

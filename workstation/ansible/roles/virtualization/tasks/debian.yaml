@@ -6,4 +6,17 @@
     - libvirt-daemon-system
     - virt-manager
     - virt-viewer
+    - build-dep
+    - ruby-libvirt
+    - qemu
+    - libvirt-daemon-system
+    - libvirt-clients
+    - ebtables
+    - dnsmasq-base
+    - libxslt-dev
+    - libxml2-dev
+    - libvirt-dev
+    - zlib1g-dev
+    - ruby-dev
+    - libguestfs-tools
 ...

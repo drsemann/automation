@@ -15,16 +15,16 @@
 
 - name: Install OnlyOffice
   ansible.builtin.apt:
-    deb: https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
+    deb: '{{onlyoffice_urll}}'
 
 - name: Install Bitwarden
   ansible.builtin.apt:
-    deb: https://github.com/bitwarden/clients/releases/download/desktop-v2023.2.0/Bitwarden-2023.2.0-amd64.deb
+    deb: '{{bitwarden_url}}'
 
 - name: Add repo PPA Eve-Integration
   ansible.builtin.apt_repository:
     repo: 'ppa:smartfinn/eve-ng-integration'
-    codename: '{{ ansible_distribution_release }}'
+    codename: '{{ansible_distribution_release}}'
 
 - name: Install Eve-Integration
   ansible.builtin.apt:

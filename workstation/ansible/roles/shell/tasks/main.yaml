@@ -15,6 +15,42 @@
     - '/home/{{host_user}}/Documentos/Projetos/vagrant'
     - '/home/{{host_user}}/Documentos/Projetos/docker'
 
+- name: Get starship install script
+  ansible.builtin.get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/starship_install.sh
+    mode: '0755'
+
+- name: Install starship
+  ansible.builtin.shell:
+    cmd: /tmp/starship_install.sh --yes
+    executable: /bin/sh
+
+- name: Copy starship config
+  ansible.builtin.copy:
+    src: starship.toml
+    dest: /home/{{host_user}}/.config/starship.toml
+
+- name: Create folder Tilix schemes
+  ansible.builtin.file:
+      path: /home/{{host_user}}/.config/tilix/schemes
+      state: directory
+      owner: '{{host_user}}'
+      group: '{{host_user}}'
+      mode: '0775'
+
+- name: Clone repository scheme Tilix
+  ansible.builtin.git:
+    repo: https://codeberg.org/SnowCode/tilix-colors.git
+    dest: /home/{{host_user}}/.config/tilix/schemes/
+
+- name: Install micro plugins
+  ansible.builtin.command: '{{ item }}'
+  loop:
+    - 'micro -plugin install monokai-dark'
+    - 'micro -plugin install gotham-colors'
+    - 'micro -plugin install nordcolors'
+
 - name: Performing Tasks for Redhat Like
   include_tasks: redhat.yaml
   when: ansible_os_family == 'RedHat'
