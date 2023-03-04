@@ -36,7 +36,11 @@
     - name: Install Terraform
       ansible.builtin.apt:
         name: terraform
-  
+
+    - name: Install Vault
+      ansible.builtin.apt:
+        name: packer
+
     - name: Install Vault
       ansible.builtin.apt:
         name: vault
