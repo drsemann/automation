@@ -15,6 +15,14 @@
     - '/home/{{host_user}}/Documentos/Projetos/treinamentos'
     - '/home/{{host_user}}/Documentos/Projetos/docker'
 
+- name: Create folder config
+  ansible.builtin.file:
+      path: /home/{{host_user}}/.config
+      state: directory
+      owner: '{{host_user}}'
+      group: '{{host_user}}'
+      mode: '0775'
+
 - name: Get starship install script
   ansible.builtin.get_url:
     url: https://starship.rs/install.sh
