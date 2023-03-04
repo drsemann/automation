@@ -4,8 +4,7 @@
   with_items:
     - htop
     - iotop
-    - iftop
-    - hdparm
+    - iftop    
     - locate
     - traceroute
     - tree
@@ -25,8 +24,7 @@
     - tcpdump
     - ethtool
     - iptraf-ng
-    - micro
-    - qbittorrent
+    - micro    
     - sed
     - bpytop
     - exa
@@ -35,10 +33,6 @@
     - golang
     - zsh
     - zsh-autosuggestions
-    - zsh-syntax-highlighting
-    - gnome-tweaks
-    - vagrant
+    - zsh-syntax-highlighting    
     - awscli
-    - tilix
-    - onedrive
 ...
