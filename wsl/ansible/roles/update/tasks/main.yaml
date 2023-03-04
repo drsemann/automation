@@ -1,5 +1,5 @@
 ---
-- name: update and upgrade Debian Like
+- name: Update e Upgrade do S.O
   ansible.builtin.apt: 
     name: '*'
     state: latest        
