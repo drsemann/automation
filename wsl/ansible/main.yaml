@@ -4,11 +4,8 @@
   become: true
   roles:
     - update
-    - base
-    - apps
-    - devops
-    - flatpak
+    - base    
+    - devops    
     - shell
-    - fonts
-    - virtualization
+    - fonts    
 ...
