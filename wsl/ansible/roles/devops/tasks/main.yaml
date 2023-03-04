@@ -1,85 +1,115 @@
 ---
-- name: Install Microsoft Key
-  ansible.builtin.apt_key:
-    url: 'https://packages.microsoft.com/keys/microsoft.asc'
-    keyring: /usr/share/keyrings/packages.microsoft.gpg
-    state: present
+- name: Add Repository and Install azure-cli
+  block:
 
-- name: Install Azure Repository
-  ansible.builtin.apt_repository:
-    repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main'
-    state: present
-    filename: azure-cli
-- name: Install Azure Cli
-  ansible.builtin.apt:
-    name: azure-cli
+    - name: Install Microsoft Key  
+      ansible.builtin.apt_key:
+        url: 'https://packages.microsoft.com/keys/microsoft.asc'
+        keyring: /usr/share/keyrings/packages.microsoft.gpg
+        state: present
 
-- name: Install Terraform Key
-  ansible.builtin.apt_key:
-    url: 'https://apt.releases.hashicorp.com/gpg'
-    keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    state: present
-- name: Install Hashicorp Repository
-  ansible.builtin.apt_repository:
-    repo: 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main'
-    state: present
-    filename: hashicorp
-- name: Install Terraform
-  ansible.builtin.apt:
-    name: terraform
-- name: Install Packer
-  ansible.builtin.apt:
-    name: packer
+    - name: Install Azure Repository
+      ansible.builtin.apt_repository:
+        repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main'
+        state: present
+        filename: azure-cli
 
-- name: Install Docker Key
-  ansible.builtin.apt_key:
-    url: 'https://download.docker.com/linux/ubuntu/gpg'
-    keyring: /usr/share/keyrings/docker.gpg
-    state: present
-- name: Install Docker Repository
-  ansible.builtin.apt_repository:
-    repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
-    state: present
-    filename: docker
-- name: Install Docker
-  ansible.builtin.apt:
-    package:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-compose-plugin      
-- name: Adding existing user to group Docker
-  ansible.builtin.user: 
-    name: '{{ host_user }}'
-    groups: docker 
-    append: yes
+    - name: Install Azure Cli
+      ansible.builtin.apt:
+        name: azure-cli
 
-- name: Install Kubernetes Key
-  ansible.builtin.apt_key:
-    url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
-    keyring: /etc/apt/keyrings/kubernetes-archive-keyring.gpg
-    state: present
-- name: Install Kubernetes Repository
-  ansible.builtin.apt_repository:
-    repo: 'deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main'
-    state: present
-    filename: kubernetes
-- name: Install Kubectl
-  ansible.builtin.apt:
-    name: kubectl
+- name: Add Repository and Install Terraform/Packer/Vault
+  block:
+  
+    - name: Install Terraform Key
+      ansible.builtin.apt_key:
+        url: 'https://apt.releases.hashicorp.com/gpg'
+        keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        state: present
+  
+    - name: Install Hashicorp Repository
+      ansible.builtin.apt_repository:
+        repo: 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main'
+        state: present
+        filename: hashicorp
+  
+    - name: Install Terraform
+      ansible.builtin.apt:
+        name: terraform
+  
+    - name: Install Vault
+      ansible.builtin.apt:
+        name: vault
+    
+- name: Add Repository and Install Docker
+  block:
+    
+    - name: Install Docker Key
+      ansible.builtin.apt_key:
+        url: 'https://download.docker.com/linux/ubuntu/gpg'
+        keyring: /usr/share/keyrings/docker.gpg
+        state: present
+    
+    - name: Install Docker Repository
+      ansible.builtin.apt_repository:
+        repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+        state: present
+        filename: docker
+    
+    - name: Install Docker
+      ansible.builtin.apt:
+        package:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin      
+    
+    - name: Adding existing user to group Docker
+      ansible.builtin.user: 
+        name: '{{ host_user }}'
+        groups: docker 
+        append: yes
 
-- name: Install Helm Key
-  ansible.builtin.apt_key:
-    url: 'https://baltocdn.com/helm/signing.asc'
-    keyring: /etc/apt/keyrings/helm.gpg
-    state: present
-- name: Install Helm Repository
-  ansible.builtin.apt_repository:
-    repo: 'deb [arch=amd64 signed-by=/etc/apt/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main'
-    state: present
-    filename: helm
-- name: Install Helm
-  ansible.builtin.apt:
-    name: helm
+- name: Add Repository and Install Kubectl and Kubeadm
+  block:
+    
+    - name: Install Kubernetes Key
+      ansible.builtin.apt_key:
+        url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+        keyring: /etc/apt/keyrings/kubernetes-archive-keyring.gpg
+        state: present
+    
+    - name: Install Kubernetes Repository
+      ansible.builtin.apt_repository:
+        repo: 'deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main'
+        state: present
+        filename: kubernetes
+    
+    - name: Install Kubectl
+      ansible.builtin.apt:
+        name: kubectl
+    
+    - name: Install Kubeadm
+      ansible.builtin.apt:
+        name: kubeadm
+
+- name: Add Repository and Install Helm
+  block:
+
+    - name: Install Helm Key
+      ansible.builtin.apt_key:
+        url: 'https://baltocdn.com/helm/signing.asc'
+        keyring: /etc/apt/keyrings/helm.gpg
+        state: present
+    
+    - name: Install Helm Repository
+      ansible.builtin.apt_repository:
+        repo: 'deb [arch=amd64 signed-by=/etc/apt/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main'
+        state: present
+        filename: helm
+    
+    - name: Install Helm
+      ansible.builtin.apt:
+        name: helm
 
 ...
