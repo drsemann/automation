@@ -1,0 +1,7 @@
+---
+# Global varaible use in some roles
+
+## Your user account
+host_user:
+
+...

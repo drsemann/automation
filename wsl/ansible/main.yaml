@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: localhost
+  become: true
+  roles:
+    - update
+    - base
+    - apps
+    - devops
+    - flatpak
+    - shell
+    - fonts
+    - virtualization
+...
