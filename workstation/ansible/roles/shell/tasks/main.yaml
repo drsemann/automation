@@ -1,4 +1,8 @@
 ---
+- name: Setando hostname
+  ansible.builtin.hostname:
+    name: '{{hostname_set}}'
+
 - name: Criando diretorios base
   file:
     path: '{{item}}'

@@ -4,6 +4,9 @@
 ## Seu usuario
 host_user:
 
+## Nome da maquina
+hostname_set:
+
 ## Link download bitwarden
 ## https://github.com/bitwarden/clients/releases/ 
 ## Desktop
