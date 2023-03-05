@@ -1,6 +1,6 @@
 ---
-- hosts: localhost
-  connection: localhost
+- hosts: all
+  #connection: localhost
   become: true
   roles:
     - update

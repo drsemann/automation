@@ -2,7 +2,7 @@
 - name: Adiciona repositorio e instala azure-cli
   block:
 
-    - name: Instalando chave Microsoft
+    - name: Adicionando chave Microsoft
       ansible.builtin.apt_key:
         url: 'https://packages.microsoft.com/keys/microsoft.asc'
         keyring: /usr/share/keyrings/packages.microsoft.gpg
@@ -21,7 +21,7 @@
 - name: Adiciona repositorio e instala Terraform/Packer/Vault
   block:
   
-    - name: Instalando chave Hashicorp
+    - name: Adicionando chave Hashicorp
       ansible.builtin.apt_key:
         url: 'https://apt.releases.hashicorp.com/gpg'
         keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
@@ -48,7 +48,7 @@
 - name: Adiciona repositorio e instala Docker
   block:
     
-    - name: Instala chave Docker
+    - name: Adicionando chave Docker
       ansible.builtin.apt_key:
         url: 'https://download.docker.com/linux/ubuntu/gpg'
         keyring: /usr/share/keyrings/docker.gpg
@@ -77,7 +77,7 @@
 - name: Adiciona repositorio e instala Kubectl/Kubeadm
   block:
     
-    - name: Instalando chave Kubernetes
+    - name: Adicionando chave Kubernetes
       ansible.builtin.apt_key:
         url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
         keyring: /etc/apt/keyrings/kubernetes-archive-keyring.gpg
@@ -100,7 +100,7 @@
 - name: Adiciona repositorio e instala Helm
   block:
 
-    - name: Instalando chave Helm
+    - name: Adicionando chave Helm
       ansible.builtin.apt_key:
         url: 'https://baltocdn.com/helm/signing.asc'
         keyring: /etc/apt/keyrings/helm.gpg
