@@ -5,8 +5,7 @@
     - qemu-kvm
     - libvirt-daemon-system
     - virt-manager
-    - virt-viewer
-    - build-dep
+    - virt-viewer    
     - ruby-libvirt
     - qemu
     - libvirt-daemon-system

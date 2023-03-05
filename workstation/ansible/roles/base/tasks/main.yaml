@@ -41,4 +41,5 @@
     - awscli
     - tilix
     - onedrive
+    - flatpak
 ...
