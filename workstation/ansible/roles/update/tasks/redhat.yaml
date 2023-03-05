@@ -1,5 +1,5 @@
 ---
-- name: update and upgrade Redhat Like
+- name: Atualizando o sistema
   ansible.builtin.dnf: 
     name: '*' 
     state: latest

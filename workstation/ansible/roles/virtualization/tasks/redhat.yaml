@@ -1,10 +1,10 @@
 ---
-- name: Install virtualization Group
+- name: Instalando Grupo Virtualization
   ansible.builtin.dnf:
     name: '@virtualization'
     state: present
 
-- name: Install libvirt
+- name: Instalando libvirt
   ansible.builtin.dnf:
     name: '{{item}}'
     state: present
@@ -15,20 +15,20 @@
     - ruby-devel
     - libguestfs-tools
 
-- name: Configure libvirtd.conf - 1
+- name: Configurando libvirtd.conf - 1
   ansible.builtin.command: sed -i '/unix_sock_group/s/^# *//' /etc/libvirt/libvirtd.conf
 
-- name: Configure libvirtd.conf - 2
+- name: Configurando libvirtd.conf - 2
   ansible.builtin.command: sed -i '/unix_sock_rw_perms/s/^# *//' /etc/libvirt/libvirtd.conf
 
-- name: "Manage Virtualization Services"
+- name: Ativando e Inicializando servicos
   ansible.builtin.service:
-    name: "{{item}}"
-    state: "started"
+    name: '{{item}}'
+    state: started
     enabled: true
   become: true
   loop:
-    - "virtqemud.service"
-    - "virtnetworkd.service"
-    - "libvirtd.service"
+    - virtqemud.service
+    - virtnetworkd.service
+    - libvirtd.service
 ...

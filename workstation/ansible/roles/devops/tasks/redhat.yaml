@@ -1,10 +1,10 @@
 ---
-- name: Add Microsoft Repository Keys
+- name: Adicionando chave Microsoft
   ansible.builtin.rpm_key:
     state: present
     key: https://packages.microsoft.com/keys/microsoft.asc
 
-- name: Add repositories Visual Studio Code
+- name: Adicionando Repositorio Microsoft
   yum_repository:
       name: vscode
       description: Visual Studio Code
@@ -14,17 +14,17 @@
       gpgkey: https://packages.microsoft.com/keys/microsoft.asc
       state: present
 
-- name: Install Visual Studio Code
+- name: Instalando Visual Studio Code
   ansible.builtin.dnf:
     name: code
     state: present
 
-- name: Add Hashicorp Repository Keys
+- name: Adicionando chave Hashicorp
   ansible.builtin.rpm_key:
     state: present
     key: https://rpm.releases.hashicorp.com/gpg
 
-- name: Add Repository Hashicorp
+- name: Adicionando Repositorio Hashicorp
   yum_repository:
     name: hashicorp-stable
     description: Hashicorp Softwares
@@ -34,7 +34,7 @@
     gpgkey: https://rpm.releases.hashicorp.com/gpg
     state: present
 
-- name: Install Terrafor and Packer
+- name: Instalando Terrafor/Packer/Vault
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
@@ -43,30 +43,29 @@
     - packer
     - vault
 
-- name: Install Kubectl
+- name: Instalando Kubectl
   ansible.builtin.dnf:
     name: kubernetes-client
     state: present
 
-- name: Install Kubeadm
+- name: Instalando Kubeadm
   ansible.builtin.dnf:
     name: kubernetes-kubeadm
     state: present
 
-- name: Install miniKube
+- name: Instalando miniKube
   ansible.builtin.dnf:
     name: '{{minikube_url}}'
     state: present
     disable_gpg_check: true
 
-- name: Install Helm
+- name: Instalando Helm
   ansible.builtin.dnf:
     name: helm
     state: present
 
-- name: Install Development Group
+- name: Instalando Grupo Development
   ansible.builtin.dnf:
     name: '@development-tools'
     state: present
-
 ...

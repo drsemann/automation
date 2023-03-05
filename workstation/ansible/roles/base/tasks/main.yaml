@@ -1,5 +1,5 @@
 ---
-- name: Install packages base
+- name: Instalando pacotes base
   ansible.builtin.package: name={{item}}
   with_items:
     - htop

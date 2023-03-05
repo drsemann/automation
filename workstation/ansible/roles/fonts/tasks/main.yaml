@@ -1,5 +1,5 @@
 ---
-- name: Create folder fonts
+- name: Criando pasta fonts
   ansible.builtin.file:
       path: /home/{{host_user}}/.local/share/fonts
       state: directory
@@ -7,7 +7,7 @@
       group: '{{host_user}}'
       mode: '0775'
 
-- name: Installing NerdFonts
+- name: Instalando NerdFonts
   ansible.builtin.unarchive:
     src: '{{item}}'
     dest: /home/{{host_user}}/.local/share/fonts
@@ -23,7 +23,7 @@
     - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/SourceCodePro.zip
     - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip    
 
-- name: Refresh font cache
+- name: Refresh cache
   ansible.builtin.shell: fc-cache -vf
 
 ...

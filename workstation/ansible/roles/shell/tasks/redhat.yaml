@@ -1,5 +1,5 @@
 ---
-- name: Copy bashrc
+- name: Copiando bashrc
   ansible.builtin.copy:
     src: bashrcFedora
     dest: /home/{{host_user}}/.bashrc
@@ -7,7 +7,7 @@
     owner: '{{host_user}}'
     group: '{{host_user}}'
 
-- name: Copy zshrc
+- name: Copiando zshrc
   ansible.builtin.copy:
     src: zshrcFedora
     dest: /home/{{host_user}}/.zshrc

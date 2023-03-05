@@ -1,32 +1,32 @@
 ---
-- name: Install Brave Key
+- name: Adicionando chave Brave
   ansible.builtin.apt_key:
     url: 'https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg'
     keyring: /usr/share/keyrings/brave-browser-archive-keyring.gpg
     state: present
-- name: Install Brave Repository
+- name: Adicionando Repositorio Brave
   ansible.builtin.apt_repository:
     repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main'
     state: present
     filename: brave
-- name: Install Brave
+- name: Instalando Brave
   ansible.builtin.apt:
     name: brave-browser
 
-- name: Install OnlyOffice
+- name: Instalando OnlyOffice
   ansible.builtin.apt:
     deb: '{{onlyoffice_urll}}'
 
-- name: Install Bitwarden
+- name: Instalando Bitwarden
   ansible.builtin.apt:
     deb: '{{bitwarden_url}}'
 
-- name: Add repo PPA Eve-Integration
+- name: Adicionando Repositorio PPA Eve-Integration
   ansible.builtin.apt_repository:
     repo: 'ppa:smartfinn/eve-ng-integration'
     codename: '{{ansible_distribution_release}}'
 
-- name: Install Eve-Integration
+- name: Instalando Eve-Integration
   ansible.builtin.apt:
     name: eve-ng-integration
 

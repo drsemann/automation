@@ -1,5 +1,5 @@
 ---
-- name: Ensure default directories in home
+- name: Criando diretorios base
   file:
     path: '{{item}}'
     state: directory
@@ -15,23 +15,23 @@
     - '/home/{{host_user}}/Documentos/Projetos/vagrant'
     - '/home/{{host_user}}/Documentos/Projetos/docker'
 
-- name: Get starship install script
+- name: Baixando script starship
   ansible.builtin.get_url:
     url: https://starship.rs/install.sh
     dest: /tmp/starship_install.sh
     mode: '0755'
 
-- name: Install starship
+- name: Instalando starship
   ansible.builtin.shell:
     cmd: /tmp/starship_install.sh --yes
     executable: /bin/sh
 
-- name: Copy starship config
+- name: Copiando configuracao starship
   ansible.builtin.copy:
     src: starship.toml
     dest: /home/{{host_user}}/.config/starship.toml
 
-- name: Create folder Tilix schemes
+- name: Criando diretorio de temas Tilix
   ansible.builtin.file:
       path: /home/{{host_user}}/.config/tilix/schemes
       state: directory
@@ -39,23 +39,23 @@
       group: '{{host_user}}'
       mode: '0775'
 
-- name: Clone repository scheme Tilix
+- name: Clonando temas para o Tilix
   ansible.builtin.git:
     repo: https://codeberg.org/SnowCode/tilix-colors.git
     dest: /home/{{host_user}}/.config/tilix/schemes/
 
-- name: Install micro plugins
+- name: Instalando micro plugins
   ansible.builtin.command: '{{ item }}'
   loop:
     - 'micro -plugin install monokai-dark'
     - 'micro -plugin install gotham-colors'
     - 'micro -plugin install nordcolors'
 
-- name: Performing Tasks for Redhat Like
+- name: Alvo base Redhat 
   include_tasks: redhat.yaml
   when: ansible_os_family == 'RedHat'
 
-- name: Performing Tasks for Debian Like
+- name: Alvo base Debian
   include_tasks: debian.yaml
   when: ansible_os_family == 'Debian'
 ...

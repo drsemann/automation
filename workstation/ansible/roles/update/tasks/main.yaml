@@ -1,9 +1,9 @@
 ---
-- name: Performing Tasks for CentOS
+- name: Alvo base Redhat 
   include_tasks: redhat.yaml
   when: ansible_os_family == 'RedHat'
 
-- name: Performing Tasks for Ubuntu
+- name: Alvo base Debian
   include_tasks: debian.yaml
   when: ansible_os_family == 'Debian'
 ...
