@@ -48,6 +48,14 @@
     repo: https://codeberg.org/SnowCode/tilix-colors.git
     dest: /home/{{host_user}}/.config/tilix/schemes/
 
+- name: Copiando tmux.conf
+  ansible.builtin.copy:
+    src: tmux.conf
+    dest: /home/{{host_user}}/.tmux.conf
+    mode: '0644'
+    owner: '{{host_user}}'
+    group: '{{host_user}}'
+
 - name: Instalando micro plugins
   ansible.builtin.command: '{{ item }}'
   loop:
