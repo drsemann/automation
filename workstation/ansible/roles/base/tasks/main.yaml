@@ -1,7 +1,6 @@
 ---
 - name: Instalando pacotes base
-  ansible.builtin.package: name={{item}}
-  with_items:
+  ansible.builtin.package:  
     - htop
     - iotop
     - iftop
@@ -42,4 +41,5 @@
     - tilix
     - onedrive
     - flatpak
+  state: present
 ...
