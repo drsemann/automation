@@ -21,7 +21,8 @@
     - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/ProFont.zip
     - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Meslo.zip
     - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/SourceCodePro.zip
-    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip    
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
 
 - name: Refresh cache
   ansible.builtin.shell: fc-cache -vf
