@@ -1,6 +1,6 @@
 ---
 - name: Instalando pacotes base
-  ansible.builtin.package:  
+  package:  
     - htop
     - iotop
     - iftop
