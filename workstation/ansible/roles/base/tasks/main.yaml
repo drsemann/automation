@@ -42,5 +42,8 @@
       - tilix
       - onedrive
       - flatpak
+      - bat
+      - zoxide
+      - ripgrep
     state: present
 ...
