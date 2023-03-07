@@ -6,14 +6,13 @@
 
 - name: Instalando libvirt
   ansible.builtin.dnf:
-    name: '{{item}}'
+    name: 
+      - libvirt
+      - libvirt-devel
+      - libxml2-devel
+      - ruby-devel
+      - libguestfs-tools
     state: present
-  loop:
-    - libvirt
-    - libvirt-devel
-    - libxml2-devel
-    - ruby-devel
-    - libguestfs-tools
 
 - name: Configurando libvirtd.conf - 1
   ansible.builtin.command: sed -i '/unix_sock_group/s/^# *//' /etc/libvirt/libvirtd.conf
@@ -23,12 +22,10 @@
 
 - name: Ativando e Inicializando servicos
   ansible.builtin.service:
-    name: '{{item}}'
+    name:
+      - virtqemud.service
+      - virtnetworkd.service
+      - libvirtd.service
     state: started
-    enabled: true
-  become: true
-  loop:
-    - virtqemud.service
-    - virtnetworkd.service
-    - libvirtd.service
+    enabled: true    
 ...
