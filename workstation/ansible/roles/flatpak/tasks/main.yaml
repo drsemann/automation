@@ -2,53 +2,18 @@
 - name: Adicionando Repositorio Flathub
   ansible.builtin.command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         
-- name: Instalando Spotify via flatpak
+- name: Instalando Apps via flatpak
   community.general.flatpak:
-    name: com.spotify.Client
-    state: present
-
-- name: Instalando Discord via flatpak
-  community.general.flatpak:
-    name: com.discordapp.Discord
-    state: present
-
-- name: Instalando ExtensionManager via flatpak
-  community.general.flatpak:
-    name: com.mattjakeman.ExtensionManager
-    state: present
-
-- name: Instalando Draw.io via flatpak
-  community.general.flatpak:
-    name: com.jgraph.drawio.desktop
-    state: present
-
-- name: Instalando Obsidian via flatpak
-  community.general.flatpak:
-    name: md.obsidian.Obsidian
-    state: present
-
-- name: Instalando ArduinoIDE2 via flatpak
-  community.general.flatpak:
-    name: cc.arduino.IDE2
-    state: present
-
-- name: Instalando Remmina via flatpak
-  community.general.flatpak:
-    name: org.remmina.Remmina
-    state: present
-
-- name: Instalando Anydesk via flatpak
-  community.general.flatpak:
-    name: com.anydesk.Anydesk
-    state: present
-
-- name: Instalando Telegram via flatpak
-  community.general.flatpak:
-    name: org.telegram.desktop
-    state: present
-
-- name: Instalando Dropbox via flatpak
-  community.general.flatpak:
-    name: com.dropbox.Client
+    name: 
+      - com.spotify.Client
+      - com.discordapp.Discord
+      - com.mattjakeman.ExtensionManager
+      - com.jgraph.drawio.desktop
+      - md.obsidian.Obsidian
+      - cc.arduino.IDE2
+      - org.remmina.Remmina
+      - com.anydesk.Anydesk
+      - org.telegram.desktop
+      - com.dropbox.Client
     state: present
 ...
