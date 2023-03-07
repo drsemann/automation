@@ -42,5 +42,5 @@
       - tilix
       - onedrive
       - flatpak
-  state: present
+    state: present
 ...
