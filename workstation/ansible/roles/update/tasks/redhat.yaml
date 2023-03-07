@@ -1,8 +1,0 @@
----
-- name: Atualizando o sistema
-  ansible.builtin.dnf: 
-    name: '*' 
-    state: latest
-    update_cache: yes
-    update_only: yes
-...

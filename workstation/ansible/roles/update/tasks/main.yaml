@@ -1,9 +1,17 @@
 ---
-- name: Alvo base Redhat 
-  include_tasks: redhat.yaml
+- name: Atualizando o sistema (RedHat)
+  ansible.builtin.dnf: 
+    name: '*' 
+    state: latest
+    update_cache: yes
+    update_only: yes
   when: ansible_os_family == 'RedHat'
 
-- name: Alvo base Debian
-  include_tasks: debian.yaml
+- name: Atualizando o sistema (Debian)
+  ansible.builtin.apt: 
+    name: '*'
+    state: latest        
+    update_cache: yes
+    only_upgrade: yes
   when: ansible_os_family == 'Debian'
 ...

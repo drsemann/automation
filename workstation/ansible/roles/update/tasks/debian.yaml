@@ -1,8 +1,0 @@
----
-- name: Atualizando o sistema
-  ansible.builtin.apt: 
-    name: '*'
-    state: latest        
-    update_cache: yes
-    only_upgrade: yes
-...
