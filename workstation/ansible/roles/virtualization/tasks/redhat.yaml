@@ -22,10 +22,12 @@
 
 - name: Ativando e Inicializando servicos
   ansible.builtin.service:
-    name:
-      - virtqemud.service
-      - virtnetworkd.service
-      - libvirtd.service
+    name: '{{item}}'
     state: started
-    enabled: true    
+    enabled: true
+  become: true
+  loop:
+    - virtqemud.service
+    - virtnetworkd.service
+    - libvirtd.service
 ...
