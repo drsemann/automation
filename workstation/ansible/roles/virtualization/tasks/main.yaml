@@ -38,8 +38,8 @@
       ansible.builtin.command: virsh net-define /tmp/libvirt_net_bridge.xml
     
     - name: Inicializando interface no libvirt
-      ansible.builtin.command: virsh net-start br0
+      ansible.builtin.command: virsh net-start bridge
 
     - name: Configurando para inicializacao no boot
-      ansible.builtin.command: virsh net-autostart br0
+      ansible.builtin.command: virsh net-autostart bridge
 ...
