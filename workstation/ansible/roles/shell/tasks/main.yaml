@@ -1,6 +1,6 @@
 ---
 
-- import_tasks: shell.yaml
+- import_tasks: shells.yaml
 
 - name: Setando hostname
   ansible.builtin.hostname:
