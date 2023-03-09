@@ -6,5 +6,5 @@
 ### Comando de execução
 
 ```shell
-# ansible-playbook -K main.yaml
+# ansible-playbook -K workstation.yaml
 ```
