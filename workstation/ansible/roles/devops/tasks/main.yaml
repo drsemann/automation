@@ -1,9 +1,8 @@
 ---
-- import_tasks: 
-    - docker.yaml    
-    - hashicorp.yaml
-    - helm.yaml
-    - kubernetes.yaml
-    - microsoft.yaml
-    - minikube.yaml
+- import_tasks: docker.yaml    
+- import_tasks: hashicorp.yaml
+- import_tasks: helm.yaml
+- import_tasks: kubernetes.yaml
+- import_tasks: microsoft.yaml
+- import_tasks: minikube.yaml
 ...
