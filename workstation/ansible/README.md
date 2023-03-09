@@ -1,6 +1,7 @@
 ## Playbook para pos-instalação de workstation (Ubuntu/Fedora)
 
-- Ajustar variáveis no group_vars/all.yaml antes de executar a playbook.
+- Ajustar variáveis no **group_vars/all.yaml**.
+- Ajustar variáveis na pasta **defautls** nas roles **apps** e **devops**
 
 ### Comando de execução
 
