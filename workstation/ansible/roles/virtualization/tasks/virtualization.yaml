@@ -20,7 +20,7 @@
           - zlib1g-dev
           - ruby-dev
           - libguestfs-tools
-      state: present
+        state: present
   when: ansible_os_family == 'Debian'
 
 - name: Virtualizador KVM/Qemu distro base RedHat
