@@ -73,5 +73,10 @@
         name: '{{bitwarden_url}}'
         state: present
         disable_gpg_check: true
+    
+    - name: Instalando Grupo Development
+      ansible.builtin.dnf:
+        name: '@development-tools'
+        state: present
   when: ansible_os_family == 'RedHat'
 ...  
