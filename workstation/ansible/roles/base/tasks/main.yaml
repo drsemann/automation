@@ -45,5 +45,6 @@
       - bat
       - zoxide
       - ripgrep
+      - duf
     state: present
 ...
