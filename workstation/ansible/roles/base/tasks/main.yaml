@@ -29,8 +29,7 @@
       - qbittorrent
       - sed
       - bpytop
-      - exa
-      - ansible 
+      - exa 
       - python3-pip
       - golang
       - zsh
