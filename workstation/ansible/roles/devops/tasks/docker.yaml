@@ -15,11 +15,11 @@
 
     - name: Instalando Docker
       ansible.builtin.apt:
-      package:
-        - docker-ce
-        - docker-ce-cli
-        - containerd.io
-        - docker-compose-plugin
+        package:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
 
     - name: Adicionando usuario no grupo docker
       ansible.builtin.user: 
