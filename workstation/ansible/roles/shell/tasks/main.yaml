@@ -1,4 +1,7 @@
 ---
+
+- import_tasks: shell.yaml
+
 - name: Setando hostname
   ansible.builtin.hostname:
     name: '{{hostname_set}}'
@@ -62,12 +65,4 @@
     - 'micro -plugin install monokai-dark'
     - 'micro -plugin install gotham-colors'
     - 'micro -plugin install nordcolors'
-
-- name: Alvo base Redhat 
-  include_tasks: redhat.yaml
-  when: ansible_os_family == 'RedHat'
-
-- name: Alvo base Debian
-  include_tasks: debian.yaml
-  when: ansible_os_family == 'Debian'
 ...
