@@ -4,8 +4,7 @@
 - Versão 2.14 ou superior
 
 ### Variáveis
-- Ajustar variáveis no **group_vars/all.yaml**.
-- Ajustar variáveis na pasta **defaults** nas roles **apps** e **devops**
+- Ajustar variáveis no **host_vars/all.yaml**.
 
 ### Comando de execução
 
