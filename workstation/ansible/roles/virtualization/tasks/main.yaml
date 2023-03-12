@@ -1,45 +1,6 @@
 ---
 - import_tasks: virtualization.yaml
-
-- name: Adicionando usuario no grupo libvirt
-  ansible.builtin.user: 
-    name: '{{ host_user }}'
-    groups: libvirt 
-    append: yes
-
-- name: Configurando plugin do libvirt no vagrant
-  ansible.builtin.command: vagrant plugin install vagrant-libvirt
-
-- name: Configurando interface bridge
-  block:
-    - name: Criando interface bridge br0
-      ansible.builtin.command: nmcli con add ifname br0 type bridge con-name br0
-
-    - name: Setando interface fisica como slave
-      ansible.builtin.command: nmcli con add type bridge-slave ifname {{ interface_local }} master br0
-    
-    - name: Desabilitando stp na interface bridge
-      ansible.builtin.command: nmcli con modify br0 bridge.stp no
-    
-    - name: Desativando interface local
-      ansible.builtin.command: nmcli con down "{{name_interface}}"
-    
-    - name: Ativando interfce bridge br0
-      ansible.builtin.command: nmcli con up br0
-
-- name: Configurando interface no libvirt
-  block:
-    - name: Copiando configuracao da interface
-      ansible.builtin.copy:
-        src: libvirt_net_bridge.xml
-        dest: /tmp/libvirt_net_bridge.xml
-
-    - name: Definindo interface no libvirt
-      ansible.builtin.command: virsh net-define /tmp/libvirt_net_bridge.xml
-    
-    - name: Inicializando interface no libvirt
-      ansible.builtin.command: virsh net-start bridge
-
-    - name: Configurando para inicializacao no boot
-      ansible.builtin.command: virsh net-autostart bridge
+- import_tasks: configs/user_permission.yaml
+- import_tasks: configs/plugin_libvirt_vagrant.yaml
+- import_tasks: configs/interface_bridge.yaml
 ...

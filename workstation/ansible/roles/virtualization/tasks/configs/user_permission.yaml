@@ -1,0 +1,7 @@
+---
+- name: Adicionando usuario no grupo libvirt
+  ansible.builtin.user: 
+    name: '{{ host_user }}'
+    groups: libvirt 
+    append: yes
+...
