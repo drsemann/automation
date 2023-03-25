@@ -1,0 +1,40 @@
+---
+- name: Baixando script starship
+  ansible.builtin.get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/starship_install.sh
+    mode: '0755'
+
+- name: Instalando starship
+  ansible.builtin.shell:
+    cmd: /tmp/starship_install.sh --yes
+    executable: /bin/sh
+
+- name: Criando pasta .config
+  ansible.builtin.file:
+      path: /root/.config
+      state: directory
+      owner: 'root'
+      group: 'root'
+      mode: '0775'
+
+- name: Copiando configuracao starship
+  ansible.builtin.copy:
+    src: starship.toml
+    dest: /root/.config/starship.toml
+
+- name: Copiando bashrc
+  ansible.builtin.copy:
+    src: bashrc
+    dest: /root/.bashrc
+    mode: '0644'
+    owner: 'root'
+    group: 'root'
+
+- name: Instalando micro plugins
+  ansible.builtin.command: '{{ item }}'
+  loop:
+    - 'micro -plugin install monokai-dark'
+    - 'micro -plugin install gotham-colors'
+    - 'micro -plugin install nordcolors'
+...

@@ -1,0 +1,35 @@
+---
+- name: Instalacao Pacotes base
+  ansible.builtin.package:
+    name:
+      - vim-nox
+      - htop
+      - iotop
+      - iftop
+      - hdparm
+      - locate
+      - traceroute
+      - ipcalc
+      - whois
+      - dnsutils
+      - net-tools
+      - ncdu
+      - bash-completion
+      - fzf
+      - curl
+      - grc
+      - nmap
+      - links
+      - tcpdump
+      - ethtool
+      - iptraf-ng
+      - micro
+      - bpytop
+      - exa 
+      - python3-pip
+      - golang
+      - bat
+      - zoxide
+      - ripgrep
+    state: present
+...

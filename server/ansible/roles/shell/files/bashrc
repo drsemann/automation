@@ -1,0 +1,37 @@
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# Custom Alias
+export LS_OPTIONS='--color=auto'
+eval "`dircolors`"
+alias ls='exa --icons'
+alias ll='ls $LS_OPTIONS -l'
+alias l='ls $LS_OPTIONS -lha'
+
+alias grep='grep --color'
+alias egrep='egrep --color'
+alias ip='ip -c'
+alias diff='diff --color'
+alias meuip='curl ifconfig.me; echo;'
+alias tail='grc tail'
+alias ping='grc ping'
+alias ps='grc ps'
+alias netstat='grc netstat'
+alias dig='grc dig'
+alias traceroute='grc traceroute'
+alias aptu='apt update -y;sudo apt upgrade -y'
+alias apti='apt install -y'
+alias aptr='apt remove -y'
+alias apts='apt search'
+alias aptc='apt autoremove -y;sudo apt clean all'
+alias ifconfig='grc ifconfig'
+alias l='ls -lh'
+alias la='ls -lhra'
+
+# Starship Prompt
+eval "$(starship init bash)"

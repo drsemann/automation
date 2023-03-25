@@ -1,0 +1,8 @@
+---
+- name: Iniciando Playbook
+  hosts: servers
+  roles:
+    - update
+    - base
+    - shell  
+...
