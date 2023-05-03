@@ -2,15 +2,16 @@
 - hosts: localhost
   vars:
     ## Seu usuario
-    host_user: netuno
+    host_user:
     
     ## Nome da maquina
-    hostname_set: robalo
+    hostname_set:
     
     ## Link download bitwarden
     ## https://github.com/bitwarden/clients/releases/ 
     ## Desktop
     bitwarden_url:
+    
     ## Link download onlyoffice
     ## https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors.x86_64.rpm - Fedora
     ## https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb  - Ubuntu
