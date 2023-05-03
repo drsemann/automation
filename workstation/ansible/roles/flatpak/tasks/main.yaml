@@ -15,5 +15,11 @@
       - com.anydesk.Anydesk
       - org.telegram.desktop
       - com.dropbox.Client
+      - com.microsoft.Edge
+      - com.github.unrud.VideoDownloader
+      - com.github.IsmaelMartinez.teams_for_linux
+      - io.podman_desktop.PodmanDesktop
+      - org.gnome.gitlab.YaLTeR.VideoTrimmer
+      - org.videolan.VLC
     state: present
 ...
