@@ -1,37 +1,11 @@
 ---
-- name: Apps Kubernetes distro base Debian
-  block:
-    - name: Adicionando chave Kubernetes
-      ansible.builtin.apt_key:
-        url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
-        keyring: /etc/apt/keyrings/kubernetes-archive-keyring.gpg
-        state: present
-
-    - name: Adicionando Repositorio Kubernetes
-      ansible.builtin.apt_repository:
-        repo: 'deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main'
-        state: present
-        filename: kubernetes
-
-    - name: Instalando Kubectl
-      ansible.builtin.apt:
-        name: kubectl
-
-    - name: Instalando Kubeadm
-      ansible.builtin.apt:
-        name: kubeadm
-  when: ansible_os_family == 'Debian'
-
-- name: Apps Kubernetes distro base RedHat
-  block:
-    - name: Instalando Kubectl
-      ansible.builtin.dnf:
-        name: kubernetes-client
-        state: present
-
-    - name: Instalando Kubeadm
-      ansible.builtin.dnf:
-        name: kubernetes-kubeadm
-        state: present
-  when: ansible_os_family == 'RedHat'
+- name: Instalando Kubectl
+  ansible.builtin.dnf:
+    name: kubernetes-client
+    state: present
+    
+- name: Instalando Kubeadm
+  ansible.builtin.dnf:
+    name: kubernetes-kubeadm
+    state: present
 ...

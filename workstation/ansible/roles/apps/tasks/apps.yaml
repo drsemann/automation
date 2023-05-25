@@ -1,82 +1,49 @@
 ---
-- name: Apps distro base Debian
-  block:
-    - name: Adicionando chave Brave
-      ansible.builtin.apt_key:
-        url: 'https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg'
-        keyring: /usr/share/keyrings/brave-browser-archive-keyring.gpg
-        state: present
-    - name: Adicionando Repositorio Brave
-      ansible.builtin.apt_repository:
-        repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main'
-        state: present
-        filename: brave
-    - name: Instalando Brave
-      ansible.builtin.apt:
-        name: brave-browser
+- name: Adicionando chaves RPMFusion
+  ansible.builtin.rpm_key:
+    state: present
+    key: '{{item}}'
+  loop:
+    - 'https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020'
+    - 'https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020'
 
-    - name: Instalando OnlyOffice
-      ansible.builtin.apt:
-        deb: '{{onlyoffice_url}}'
+- name: Adicionando Repositorio RPMFusion
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - 'https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm'
+    - 'https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm'
+- name: Adicionando chave Brave
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+- name: Adicionando Repositorio Brave
+  yum_repository:
+      name: brave-browser
+      description: Brave Browser - $basearch
+      baseurl: https://brave-browser-rpm-release.s3.brave.com/x86_64/
+      enabled: yes
+      gpgcheck: yes
+      gpgkey: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+      state: present
+- name: Instalando Brave
+  ansible.builtin.dnf:
+    name: brave-browser
+    state: present
+- name: Instalando OnlyOffice
+  ansible.builtin.dnf:
+    name: '{{onlyoffice_url}}'
+    state: present
+    disable_gpg_check: true
+- name: Instalando Bitwarden
+  ansible.builtin.dnf:
+    name: '{{bitwarden_url}}'
+    state: present
+    disable_gpg_check: true
 
-    - name: Instalando Bitwarden
-      ansible.builtin.apt:
-        deb: '{{bitwarden_url}}'
-  when: ansible_os_family == 'Debian'
-
-- name: Apps distro base Redhat
-  block:
-    - name: Adicionando chaves RPMFusion
-      ansible.builtin.rpm_key:
-        state: present
-        key: '{{item}}'
-      loop:
-        - 'https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020'
-        - 'https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020'
-  
-    - name: Adicionando Repositorio RPMFusion
-      ansible.builtin.dnf:
-        name: '{{ item }}'
-        state: present
-      loop:
-        - 'https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm'
-        - 'https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm'
-
-    - name: Adicionando chave Brave
-      ansible.builtin.rpm_key:
-        state: present
-        key: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-
-    - name: Adicionando Repositorio Brave
-      yum_repository:
-          name: brave-browser
-          description: Brave Browser - $basearch
-          baseurl: https://brave-browser-rpm-release.s3.brave.com/x86_64/
-          enabled: yes
-          gpgcheck: yes
-          gpgkey: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-          state: present
-
-    - name: Instalando Brave
-      ansible.builtin.dnf:
-        name: brave-browser
-        state: present
-
-    - name: Instalando OnlyOffice
-      ansible.builtin.dnf:
-        name: '{{onlyoffice_url}}'
-        state: present
-        disable_gpg_check: true
-
-    - name: Instalando Bitwarden
-      ansible.builtin.dnf:
-        name: '{{bitwarden_url}}'
-        state: present
-        disable_gpg_check: true
-    
-    - name: Instalando Grupo Development
-      ansible.builtin.dnf:
-        name: '@development-tools'
-        state: present
-  when: ansible_os_family == 'RedHat'
+- name: Instalando Grupo Development
+  ansible.builtin.dnf:
+    name: '@development-tools'
+    state: present
 ...  

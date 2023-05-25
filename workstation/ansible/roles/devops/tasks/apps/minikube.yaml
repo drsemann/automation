@@ -1,17 +1,7 @@
 ---
-- name: miniKube distro base Debian
-  block:
-    - name: Instalando minikube
-      ansible.builtin.apt:
-        deb: '{{minikube_url}}'
-  when: ansible_os_family == 'Debian'
-
-- name: miniKube distro base RedHat
-  block:
-    - name: Instalando miniKube
-      ansible.builtin.dnf:
-        name: '{{minikube_url}}'
-        state: present
-        disable_gpg_check: true
-  when: ansible_os_family == 'RedHat'
+- name: Instalando miniKube
+  ansible.builtin.dnf:
+    name: '{{minikube_url}}'
+    state: present
+    disable_gpg_check: true
 ...
