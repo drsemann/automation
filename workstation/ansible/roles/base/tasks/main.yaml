@@ -1,49 +1,88 @@
 ---
-- name: Instalando pacotes base
-  ansible.builtin.package:
-    name:
-      - htop
-      - iotop
-      - iftop
-      - hdparm
-      - locate
-      - traceroute
-      - tree
-      - ipcalc
-      - sipcalc
-      - whois
-      - dnsutils
-      - net-tools
-      - ncdu
-      - neofetch
-      - bash-completion
-      - fzf
-      - curl
-      - grc
-      - nmap
-      - links
-      - tcpdump
-      - ethtool
-      - iptraf-ng
-      - micro
-      - qbittorrent
-      - sed
-      - bpytop
-      - exa 
-      - python3-pip
-      - golang
-      - zsh
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
-      - gnome-tweaks
-      - vagrant
-      - awscli
-      - tilix
-      - onedrive
-      - flatpak
-      - bat
-      - zoxide
-      - ripgrep
-      - duf
-    state: present
+- name: Pacotes Base do Sistema
+  block:    
+    - name: Instalando pacotes
+      ansible.builtin.package:
+        name:
+          - htop
+          - iotop
+          - iftop
+          - hdparm
+          - locate
+          - traceroute
+          - tree
+          - ipcalc
+          - sipcalc
+          - whois
+          - dnsutils
+          - net-tools
+          - ncdu
+          - neofetch
+          - bash-completion
+          - fzf
+          - curl
+          - grc
+          - nmap
+          - links
+          - tcpdump
+          - ethtool
+          - iptraf-ng
+          - micro
+          - qbittorrent
+          - sed
+          - bpytop
+          - exa 
+          - python3-pip
+          - golang
+          - zsh
+          - zsh-autosuggestions
+          - zsh-syntax-highlighting
+          - gnome-tweaks
+          - vagrant
+          - awscli
+          - tilix
+          - onedrive
+          - flatpak
+          - bat
+          - zoxide
+          - ripgrep
+          - duf
+        state: present
+
+- name: Removendo pacotes pos-install (Debian)
+  block:    
+    - name: Removendo pacotes
+      ansible.builtin.package:
+        name:
+          - gnome-2048
+          - aisleriot
+          - atomix
+          - five-or-more
+          - hitori iagno
+          - gnome-klotski
+          - lightsoff
+          - gnome-mahjongg
+          - gnome-mines
+          - gnome-nibbles
+          - quadrapassel
+          - four-in-a-row
+          - gnome-robots
+          - gnome-sudoku
+          - swell-foop
+          - tali
+          - gnome-taquin
+          - gnome-tetravex
+          - transmission-common
+          - transmission-gtk
+          - rhythmbox
+          - rhythmbox-data
+          - rhythmbox-plugin-cdrecorder
+          - rhythmbox-plugins
+          - gnome-music
+          - gnome-video-effects
+          - gnome-shell-extensions
+          - shotwell
+          - shotwell-common
+        state: absent
+  when: ansible_os_family == 'Debian'
 ...

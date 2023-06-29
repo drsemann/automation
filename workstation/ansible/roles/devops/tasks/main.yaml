@@ -1,6 +1,8 @@
----  
+---
+- import_tasks: apps/docker.yaml    
 - import_tasks: apps/hashicorp.yaml
+- import_tasks: apps/helm.yaml
 - import_tasks: apps/kubernetes.yaml
 - import_tasks: apps/microsoft.yaml
-- import_tasks: apps/minikube.yaml
+#- import_tasks: apps/minikube.yaml
 ...

@@ -1,25 +1,50 @@
 ---
-- name: Adicionando chave Hashicorp
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://rpm.releases.hashicorp.com/gpg
+- name: Apps Hashicorp distro base Debian
+  block:
+    - name: Adicionando chave Hashicorp
+      ansible.builtin.apt_key:
+        url: 'https://apt.releases.hashicorp.com/gpg'
+        keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        state: present
 
-- name: Adicionando Repositorio Hashicorp
-  yum_repository:
-    name: hashicorp-stable
-    description: Hashicorp Softwares
-    baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
-    enabled: yes
-    gpgcheck: yes
-    gpgkey: https://rpm.releases.hashicorp.com/gpg
-    state: present
+    - name: Adicionando Repositorio Hashicorp
+      ansible.builtin.apt_repository:
+        repo: 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main'
+        state: present
+        filename: hashicorp
+    
+    - name: Instalando Apps terraform/packer/vault
+      ansible.builtin.apt:
+        name: 
+          - terraform
+          - packer
+          - vault
+  when: ansible_os_family == 'Debian'
 
-- name: Instalando Terrafor/Packer/Vault
-  ansible.builtin.dnf:
-    name: '{{ item }}'
-    state: present
-    loop:
-      - terraform
-      - packer
-      - vault
+- name: Apps Hashicorp distro base Redhat
+  block:
+    - name: Adicionando chave Hashicorp
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://rpm.releases.hashicorp.com/gpg
+
+    - name: Adicionando Repositorio Hashicorp
+      yum_repository:
+        name: hashicorp-stable
+        description: Hashicorp Softwares
+        baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: https://rpm.releases.hashicorp.com/gpg
+        state: present
+
+    - name: Instalando Terrafor/Packer/Vault
+      ansible.builtin.dnf:
+        name: '{{ item }}'
+        state: present
+      loop:
+        - terraform
+        - packer
+        - vault
+  when: ansible_os_family == 'RedHat'
 ...

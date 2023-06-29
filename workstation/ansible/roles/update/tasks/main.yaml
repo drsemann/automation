@@ -1,15 +1,26 @@
 ---
-- name: Faster dnf
-  ini_file:
-    path: /etc/dnf/dnf.conf
-    section: main
-    option: fastestmirror
-    value: true   
+- name: Distros Base RedHat
+  block:     
+    - name: Faster dnf
+      ini_file:
+        path: /etc/dnf/dnf.conf
+        section: main
+        option: fastestmirror
+        value: true   
 
-- name: Atualizando o sistema (RedHat)
-  ansible.builtin.dnf: 
-    name: '*' 
-    state: latest
+    - name: Atualizando o sistema (RedHat)
+      ansible.builtin.dnf: 
+        name: '*' 
+        state: latest
+        update_cache: yes
+        update_only: yes
+  when: ansible_os_family == 'RedHat'
+
+- name: Atualizando o sistema (Debian)
+  ansible.builtin.apt: 
+    name: '*'
+    state: latest        
     update_cache: yes
-    update_only: yes
+    only_upgrade: yes
+  when: ansible_os_family == 'Debian'
 ...

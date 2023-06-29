@@ -5,21 +5,30 @@
 - name: Instalando Apps via flatpak
   community.general.flatpak:
     name: 
-      - com.spotify.Client
-      - com.discordapp.Discord
-      - com.mattjakeman.ExtensionManager
-      - com.jgraph.drawio.desktop
-      - md.obsidian.Obsidian
       - cc.arduino.IDE2
-      - org.remmina.Remmina
+      - com.agateau.PixelWheels
       - com.anydesk.Anydesk
-      - org.telegram.desktop
+      - com.discordapp.Discord
       - com.dropbox.Client
-      - com.microsoft.Edge
-      - com.github.unrud.VideoDownloader
       - com.github.IsmaelMartinez.teams_for_linux
-      - io.podman_desktop.PodmanDesktop
+      - com.github.unrud.VideoDownloader
+      - com.jgraph.drawio.desktop
+      - com.ktechpit.wonderwall
+      - com.mattjakeman.ExtensionManager
+      - com.microsoft.Edge
+      - com.raggesilver.BlackBox
+      - com.spotify.Client
+      - io.github.realmazharhussain.GdmSettings
+      - io.gitlab.gregorni.Calligraphy
+      - md.obsidian.Obsidian
+      - org.gabmus.hydrapaper
       - org.gnome.gitlab.YaLTeR.VideoTrimmer
+      - org.gnome.Snapshot
+      - org.gnome.Solanum
+      - org.localsend.localsend_app
+      - org.nickvision.money
+      - org.remmina.Remmina
+      - org.telegram.desktop
       - org.videolan.VLC
     state: present
 ...
