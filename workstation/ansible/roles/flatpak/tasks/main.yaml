@@ -6,7 +6,6 @@
   community.general.flatpak:
     name: 
       - cc.arduino.IDE2
-      - com.agateau.PixelWheels
       - com.anydesk.Anydesk
       - com.discordapp.Discord
       - com.dropbox.Client
@@ -17,11 +16,8 @@
       - com.mattjakeman.ExtensionManager
       - com.microsoft.Edge
       - com.raggesilver.BlackBox
-      - com.spotify.Client
-      - io.github.realmazharhussain.GdmSettings
-      - io.gitlab.gregorni.Calligraphy
-      - md.obsidian.Obsidian
-      - org.gabmus.hydrapaper
+      - com.spotify.Client       
+      - md.obsidian.Obsidian      
       - org.gnome.gitlab.YaLTeR.VideoTrimmer
       - org.gnome.Snapshot
       - org.gnome.Solanum
