@@ -25,7 +25,7 @@
   become: true
   roles:
     - update
-     - base
+    - base
     - apps
     - devops
     - flatpak
