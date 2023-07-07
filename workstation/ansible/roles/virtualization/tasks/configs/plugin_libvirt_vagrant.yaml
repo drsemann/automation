@@ -1,4 +1,6 @@
 ---
 - name: Configurando plugin do libvirt no vagrant
+  become: yes
+  become_user: {{ host_user }}
   ansible.builtin.command: vagrant plugin install vagrant-libvirt
 ...
