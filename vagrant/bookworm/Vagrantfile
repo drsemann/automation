@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  ssh_pub_key = File.readlines("#{Dir.home}/.ssh/servers.pub").first.strip
+  config.vm.provision 'shell', inline: "echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys", privileged: false
+  config.vm.synced_folder ".", "/vagrant", type: 'rsync', disabled: true, nfs: false, nfs_prune: false, server_setup: false
+  config.vm.box = "debian/bookworm64"
+
+  config.vm.define :bookworm do |bookworm|  
+  
+    docker.vm.hostname = "bookworm"    
+    docker.vm.network "public_network", :dev => "br0", :mode => "bridge", :type => "bridge", :ip => "ipdoserver"
+
+    docker.vm.provider :libvirt do |hw|
+      hw.default_prefix = "srv-"
+      hw.cpus = 4
+      hw.memory = 4096
+      hw.memorybacking :access, :mode => "shared"
+    end
+  end
+end
+
+
