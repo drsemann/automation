@@ -140,7 +140,6 @@ alias aptr='sudo apt remove -y'
 alias apts='sudo apt search'
 alias aptc='sudo apt autoremove -y;sudo apt clean all'
 alias ifconfig='grc ifconfig'
-alias vim='nvim'
 alias l='ls -lh'
 alias la='ls -lha'
 

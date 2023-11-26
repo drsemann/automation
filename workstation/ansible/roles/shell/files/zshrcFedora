@@ -27,7 +27,6 @@ alias dnfr='sudo dnf remove -y'
 alias dnfs='sudo dnf search'
 alias dnfc='sudo dnf clean all -y'
 alias ifconfig='grc ifconfig'
-alias vim='nvim'
 alias l='ls -lh'
 alias la='ls -lha'
 
