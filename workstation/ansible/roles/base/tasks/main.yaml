@@ -17,9 +17,7 @@
           - dnsutils
           - net-tools
           - ncdu
-          - neofetch
           - bash-completion
-          - fzf
           - curl
           - grc
           - nmap
@@ -31,15 +29,12 @@
           - qbittorrent
           - sed
           - bpytop
-          - exa 
+          - eza
           - python3-pip
           - golang
           - zsh
-          - zsh-autosuggestions
-          - zsh-syntax-highlighting
           - gnome-tweaks
           - vagrant
-          - awscli
           - tilix
           - onedrive
           - flatpak
