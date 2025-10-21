@@ -4,12 +4,17 @@
 # Script para configuração inicial de servidores Debian e derivados.
 #
 # O que é configurado pelo script:
-# 1 - Ajusta sourcelist com contrib e non-free
+# 1 - Ajusta sourcelist com contrib e non-free.
 # 2 - Atualiza repositorios e atualiza o sistema.
 # 3 - Instala pacotes basicos.
 # 4 - Configura bash e alias.
-# 5 - Configura fzf
-# 6 - Habilitar e configuraro o Fail2ban
+# 5 - Configura fzf.
+# 6 - Habilitar e configuraro o Fail2ban 
+# 
+# Utilizado como exemplo script de Marcelo Gondim - https://github.com/gondimcodes/servidor_template).
+#
+#
+# Diogo Semann - drsemann@gmail.com
 
 
 # Variaveis de configuração
