@@ -4,20 +4,22 @@
 # Script para configuração inicial de servidores Debian e derivados.
 #
 # O que é configurado pelo script:
-# 1 - Ajusta sourcelist com contrib e non-free.
+# 1 - Ajusta sourcelist com contrib e non-free
 # 2 - Atualiza repositorios e atualiza o sistema.
 # 3 - Instala pacotes basicos.
 # 4 - Configura bash e alias.
-# 5 - Configura fzf.
-# 6 - Habilitar e configuraro o Fail2ban 
-# 
-# Utilizado como exemplo script de Marcelo Gondim - https://github.com/gondimcodes/servidor_template).
+# 5 - Configura fzf
+# 6 - Habilitar e configuraro o Fail2ban
 #
-#
-# Diogo Semann - drsemann@gmail.com
-
+######################################################################
 
 # Variaveis de configuração
+#
+#
+# Cores
+GREEN='\e[32m'
+RESET='\e[0m'
+#
 #
 # Distro utilizada para criar o sourcelist
 DISTRO_NAME="`lsb_release -s -c`"
@@ -33,7 +35,42 @@ F2B_BANTIME="72h"
 # Limite de tentativas antes do bloqueio
 F2B_MAXRETRY="5"
 
-echo -e "Configurando repositorios APT em /etc/apt/sources.list..."
+function progresso {
+	pid=$! # Process Id of the previous running command
+
+	spin='-\|/'
+
+	i=0
+	while kill -0 $pid 2>/dev/null
+	do
+    	i=$(( (i+1) %4 ))
+    	printf "\r[ ${spin:$i:1} ] $DESC"
+    	sleep .1
+	done
+	printf "\r[ ${GREEN}OK${RESET} ] $DESC"
+	echo -e "\n"	
+}
+
+clear
+
+echo -e '
+ ███████                   ██                    ██              ██  ██
+░██░░░░██                 ░░                    ░██             ░██ ░██
+░██   ░██  ██████   ██████ ██ ███████   ██████ ██████  ██████   ░██ ░██
+░███████  ██░░░░██ ██░░░░ ░██░░██░░░██ ██░░░░ ░░░██░  ░░░░░░██  ░██ ░██
+░██░░░░  ░██   ░██░░█████ ░██ ░██  ░██░░█████   ░██    ███████  ░██ ░██
+░██      ░██   ░██ ░░░░░██░██ ░██  ░██ ░░░░░██  ░██   ██░░░░██  ░██ ░██
+░██      ░░██████  ██████ ░██ ███  ░██ ██████   ░░██ ░░████████ ███ ███
+░░        ░░░░░░  ░░░░░░  ░░ ░░░   ░░ ░░░░░░     ░░   ░░░░░░░░ ░░░ ░░░
+ ███████           ██      ██
+░██░░░░██         ░██     ░░
+░██    ░██  █████ ░██      ██  ██████   ███████
+░██    ░██ ██░░░██░██████ ░██ ░░░░░░██ ░░██░░░██
+░██    ░██░███████░██░░░██░██  ███████  ░██  ░██
+░██    ██ ░██░░░░ ░██  ░██░██ ██░░░░██  ░██  ░██
+░███████  ░░██████░██████ ░██░░████████ ███  ░██
+░░░░░░░    ░░░░░░ ░░░░░   ░░  ░░░░░░░░ ░░░   ░░
+\n'
 
 cat << EOF > /etc/apt/sources.list
 deb http://security.debian.org/debian-security $DISTRO_NAME-security main contrib non-free non-free-firmware
@@ -41,13 +78,19 @@ deb http://deb.debian.org/debian $DISTRO_NAME main contrib non-free non-free-fir
 deb http://deb.debian.org/debian $DISTRO_NAME-updates main contrib non-free non-free-firmware
 deb http://deb.debian.org/debian $DISTRO_NAME-backports main contrib non-free non-free-firmware
 EOF
+echo -e "\n[ ${GREEN}OK${RESET} ] Configurando repositorios\n"
 
-echo -e "Atualizando o sistema e instalando alguns pacotes uteis..."
-apt -y update && apt -y full-upgrade
 
-echo -e "Instalando pacotes basicos..."
-apt install -y fzf vim-nox tmux htop iotop iftop hdparm locate traceroute tree ipcalc whois dnsutils net-tools ncdu bash-completion curl grc nmap links tcpdump ethtool iptraf-ng micro sed btop python3-pip golang bat zoxide ripgrep duf fail2ban bind9utils
+DESC="Atualizando o sistema"
+(apt update  && apt upgrade -y) > /tmp/posinstall.log 2>&1 &
+progresso
 
+
+DESC="Instalando pacotes basicos"
+apt install -y fzf vim-nox tmux htop iotop iftop hdparm locate traceroute tree ipcalc whois dnsutils net-tools ncdu bash-completion curl grc nmap links tcpdump ethtool iptraf-ng micro sed btop python3-pip golang bat zoxide ripgrep duf fail2ban bind9utils > /tmp/posinstall.log 2>&1 &
+progresso
+
+echo -e "[ ${GREEN}OK${RESET} ] Configurando Fail2ban"
 cat << EOF > /etc/fail2ban/jail.local
 [DEFAULT]
 ignoreip = $F2B_IGNOREIP
@@ -63,22 +106,6 @@ enabled = true
 EOF
 
 cat << EOF > /etc/fail2ban/action.d/route.local
-# Fail2Ban configuration file
-#
-# Author: Michael Gebetsroither
-#
-# This is for blocking whole hosts through blackhole routes.
-#
-# PRO:
-#   - Works on all kernel versions and as no compatibility problems (back to debian lenny and WAY further).
-#   - It's FAST for very large numbers of blocked ips.
-#   - It's FAST because it Blocks traffic before it enters common iptables chains used for filtering.
-#   - It's per host, ideal as action against ssh password bruteforcing to block further attack attempts.
-#   - No additional software required beside iproute/iproute2
-#
-# CON:
-#   - Blocking is per IP and NOT per service, but ideal as action against ssh password bruteforcing hosts
-
 [Definition]
 actionban   = ip route add <blocktype> <ip>
 actionunban = ip route del <blocktype> <ip>
@@ -87,19 +114,16 @@ actionstart =
 actionstop =
 
 [Init]
-
-# Option:  blocktype
-# Note:    Type can be blackhole, unreachable and prohibit. Unreachable and prohibit correspond to the ICMP reject messages.
-# Values:  STRING
 blocktype = blackhole
 EOF
 
-systemctl enable fail2ban.service
-systemctl restart fail2ban.service
+(systemctl enable fail2ban.service) > /tmp/posinstall.log 2>&1
+(systemctl restart fail2ban.service) > /tmp/posinstall.log 2>&1
 
 ### .bashrc
 
-cat << 'EOF' > /root/.bashrc
+echo -e "\n[ ${GREEN}OK${RESET} ] Configurando bashrc"
+cat << 'EOF' > ~/.bashrc
 PS1="\e[32m\]\u\[\e[m\]@\[\e[36m\]\h\[\e[m:\W$ "
 umask 022
 
@@ -133,7 +157,8 @@ EOF
 
 ### .vimrc
 
-cat << 'EOF' > /root/.vimrc
+echo -e "\n[ ${GREEN}OK${RESET} ] Configurando vimrc"
+cat << 'EOF' > ~/.vimrc
 set background=dark
 set clipboard=unnamedplus
 set completeopt=noinsert,menuone,noselect
@@ -168,7 +193,9 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 EOF
 
 ### .tmux.conf
-cat << 'EOF' > /root/.tmux.conf
+
+echo -e "\n[ ${GREEN}OK${RESET} ] Configurando tmux\n"
+cat << 'EOF' > ~/.tmux.conf
 # Alterando prefixo de 'C-b' para 'C-a'
 unbind C-b
 set-option -g prefix C-a
@@ -202,5 +229,3 @@ unbind %
 
 bind Tab last-window
 EOF
-
-source /root/.bashrc
