@@ -1,0 +1,29 @@
+PS1="\e[32m\]\u\[\e[m\]@\[\e[36m\]\h\[\e[m:\W$ "
+umask 022
+
+export LS_OPTIONS='--color=auto'
+eval "$(dircolors)"
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -l'
+alias l='ls $LS_OPTIONS -lA'
+alias grep='grep --color'
+alias egrep='egrep --color'
+alias ip='ip -c'
+alias diff='diff --color'
+alias meuip='curl ifconfig.me; echo;'
+alias tail='grc tail'
+alias ping='grc ping'
+alias ps='grc ps'
+alias netstat='grc netstat'
+alias dig='grc dig'
+alias traceroute='grc traceroute'
+alias aptu='apt update -y;apt upgrade -y'
+alias apti='apt install -y'
+alias aptr='apt remove -y'
+alias apts='apt search'
+alias aptc='apt autoremove -y;apt clean all'
+alias ifconfig='grc ifconfig'
+alias l='ls -lh'
+alias la='ls -lha'
+
+eval "$(fzf --bash)"
