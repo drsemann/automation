@@ -9,7 +9,8 @@
 # 3 - Instala pacotes basicos.
 # 4 - Configura bash e alias.
 # 5 - Configura fzf
-# 6 - Habilitar e configuraro o Fail2ban
+# 6 - Habilitar e configuraro o Fail2ban (Usado como base o script: https://github.com/gondimcodes/servidor_template/blob/main/servidor_template_debian.sh)
+#
 #
 ######################################################################
 
@@ -51,6 +52,15 @@ function progresso {
 	echo -e "\n"	
 }
 
+# Pacotes a serem instalados pelo script.
+pacotes=(
+	fzf vim-nox tmux htop iotop iftop hdparm locate 
+	traceroute tree ipcalc whois dnsutils net-tools 
+	ncdu bash-completion curl grc nmap links tcpdump 
+	ethtool iptraf-ng micro sed btop python3-pip golang 
+	bat zoxide ripgrep duf fail2ban bind9utils
+)
+
 clear
 
 echo -e '
@@ -87,7 +97,7 @@ progresso
 
 
 DESC="Instalando pacotes basicos"
-apt install -y fzf vim-nox tmux htop iotop iftop hdparm locate traceroute tree ipcalc whois dnsutils net-tools ncdu bash-completion curl grc nmap links tcpdump ethtool iptraf-ng micro sed btop python3-pip golang bat zoxide ripgrep duf fail2ban bind9utils > /tmp/posinstall.log 2>&1 &
+apt install -y ${pacotes[*]} > /tmp/posinstall.log 2>&1 &
 progresso
 
 echo -e "[ ${GREEN}OK${RESET} ] Configurando Fail2ban"
