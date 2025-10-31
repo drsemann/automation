@@ -4,7 +4,7 @@
 wget -O - https://raw.githubusercontent.com/drsemann/automation/refs/heads/main/shellscript/posinstall-debian.sh | bash
 ```
 
-### NO desktop executar o srcipt:
+### No desktop executar o srcipt:
 ```bash
 wget -O - https://raw.githubusercontent.com/drsemann/automation/refs/heads/main/shellscript/posinstall-debian-desktop.sh | bash
 ```
