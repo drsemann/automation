@@ -85,6 +85,20 @@ sudo apt-get install -y /tmp/ProtonMail-desktop-beta.deb > /tmp/posinstall.log 2
 sudo apt-get install -y /tmp/protonvpn-stable-release_1.0.8_all.deb > /tmp/posinstall.log 2>&1
 sudo apt-get update -y > /tmp/posinstall.log 2>&1
 sudo apt-get install -y proton-vpn-gnome-desktop > /tmp/posinstall.log 2>&1
+
+### Brave
+sudo apt install curl -y > /tmp/posinstall.log 2>&1
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg > /tmp/posinstall.log 2>&1
+sudo curl -fsSLo /etc/apt/sources.list.d/brave-browser-release.sources https://brave-browser-apt-release.s3.brave.com/brave-browser.sources > /tmp/posinstall.log 2>&1
+sudo apt update -y > /tmp/posinstall.log 2>&1
+sudo apt install brave-browser -y > /tmp/posinstall.log 2>&1
+
+# TELEGRAM
+cd /tmp/
+wget https://telegram.org/dl/desktop/linux -O tsetup.tar.xz > /tmp/posinstall.log 2>&1
+sudo tar -xf tsetup.tar.xz -C /opt/ > /tmp/posinstall.log 2>&1
+sudo ln -sf /opt/Telegram/Telegram /usr/bin/telegram
+
 printf "\r[ ${GREEN}OK${RESET} ] $DESC"
 echo -e "\n"
 
@@ -120,5 +134,39 @@ printf "\r[ ${GREEN}OK${RESET} ] $DESC"
 ### .tmux.conf
 DESC="Tmux"
 wget -O ~/.tmux.conf https://raw.githubusercontent.com/drsemann/dotfiles/refs/heads/main/Linux/tmux.conf > /tmp/posinstall.log 2>&1 &
+printf "\r[ ${GREEN}OK${RESET} ] $DESC"
+echo -e "\n"
+
+DESC="NerdFonts"
+printf "\r[ .. ] $DESC"
+cd /tmp
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip > /tmp/posinstall.log 2>&1
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip > /tmp/posinstall.log 2>&1
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Inconsolata.zip > /tmp/posinstall.log 2>&1
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Ubuntu.zip > /tmp/posinstall.log 2>&1
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/UbuntuMono.zip > /tmp/posinstall.log 2>&1
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/ProFont.zip > /tmp/posinstall.log 2>&1
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Meslo.zip > /tmp/posinstall.log 2>&1
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/SourceCodePro.zip > /tmp/posinstall.log 2>&1
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/RobotoMono.zip > /tmp/posinstall.log 2>&1
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip > /tmp/posinstall.log 2>&1
+
+if [ ! -d "~/.local/share/fonts" ]; then
+  mkdir -p ~/.local/share/fonts
+fi
+
+unzip -o Hack.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
+unzip -o Inconsolata.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
+unzip -o Ubuntu.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
+unzip -o UbuntuMono.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
+unzip -o ProFont.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
+unzip -o Meslo.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
+unzip -o FiraCode.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
+unzip -o SourceCodePro.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
+unzip -o RobotoMono.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
+unzip -o JetBrainsMono.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
+
+fc-cache -v ~/.local/share/fonts > /tmp/posinstall.log 2>&
+
 printf "\r[ ${GREEN}OK${RESET} ] $DESC"
 echo -e "\n"
