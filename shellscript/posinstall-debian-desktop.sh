@@ -166,7 +166,7 @@ unzip -o SourceCodePro.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
 unzip -o RobotoMono.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
 unzip -o JetBrainsMono.zip -d ~/.local/share/fonts > /tmp/posinstall.log 2>&1
 
-fc-cache -v ~/.local/share/fonts > /tmp/posinstall.log 2>&
+fc-cache -v ~/.local/share/fonts > /tmp/posinstall.log 2>&1
 
 printf "\r[ ${GREEN}OK${RESET} ] $DESC"
 echo -e "\n"
