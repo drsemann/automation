@@ -67,10 +67,10 @@ echo -e "\n"
 DESC="Baixando softwares"
 printf "\r[ .. ] $DESC"
 wget -O /tmp/onlyoffice-desktopeditors_amd64.deb https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb > /tmp/posinstall.log 2>&1
-wget -O /tmp/obsidian_1.9.14_amd64.deb https://github.com/obsidianmd/obsidian-releases/releases/download/v1.9.14/obsidian_1.9.14_amd64.deb > /tmp/posinstall.log 2>&1
+wget -O /tmp/obsidian_1.12.7_amd64.deb https://github.com/obsidianmd/obsidian-releases/releases/download/v1.12.7/obsidian_1.12.7_amd64.deb > /tmp/posinstall.log 2>&1
 wget -O /tmp/sublime-text_build-4200_amd64.deb https://download.sublimetext.com/sublime-text_build-4200_amd64.deb > /tmp/posinstall.log 2>&1
 wget -O /tmp/LocalSend-1.17.0-linux-x86-64.deb https://github.com/localsend/localsend/releases/download/v1.17.0/LocalSend-1.17.0-linux-x86-64.deb > /tmp/posinstall.log 2>&1
-wget -O /tmp/ProtonMail-desktop-beta.deb https://proton.me/download/mail/linux/1.10.0/ProtonMail-desktop-beta.deb > /tmp/posinstall.log 2>&1
+wget -O /tmp/ProtonMail-desktop-beta.deb https://proton.me/download/mail/linux/1.12.1/ProtonMail-desktop-beta.deb > /tmp/posinstall.log 2>&1
 wget -O /tmp/protonvpn-stable-release_1.0.8_all.deb https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb > /tmp/posinstall.log 2>&1
 printf "\r[ ${GREEN}OK${RESET} ] $DESC"
 echo -e "\n"
@@ -78,7 +78,7 @@ echo -e "\n"
 DESC="Instalando softwares"
 printf "\r[ .. ] $DESC"
 sudo apt-get install -y /tmp/onlyoffice-desktopeditors_amd64.deb > /tmp/posinstall.log 2>&1 
-sudo apt-get install -y /tmp/obsidian_1.9.14_amd64.deb > /tmp/posinstall.log 2>&1
+sudo apt-get install -y /tmp/obsidian_1.12.7_amd64.deb > /tmp/posinstall.log 2>&1
 sudo apt-get install -y /tmp/sublime-text_build-4200_amd64.deb > /tmp/posinstall.log 2>&1
 sudo apt-get install -y /tmp/LocalSend-1.17.0-linux-x86-64.deb > /tmp/posinstall.log 2>&1
 sudo apt-get install -y /tmp/ProtonMail-desktop-beta.deb > /tmp/posinstall.log 2>&1
