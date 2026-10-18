@@ -17,7 +17,7 @@ Execute como usuário comum (sem sudo antes de bash). O script solicita sudo.
 Downloads externos mantêm versões fixadas, ajustáveis por variáveis de ambiente:
 OBSIDIAN_VERSION, SUBLIME_BUILD, LOCALSEND_VERSION, PROTON_MAIL_VERSION,
 PROTON_VPN_REPO_VERSION e NERD_FONTS_VERSION.
-ONLYOFFICE, Telegram, Brave e dotfiles usam os canais dos fornecedores.
+Telegram, Brave e dotfiles usam os canais dos fornecedores.
 HELP
 }
 
@@ -169,7 +169,6 @@ if (( APPS )); then
     : "${LOCALSEND_VERSION:=1.17.0}"
     : "${PROTON_MAIL_VERSION:=1.12.1}"
     : "${PROTON_VPN_REPO_VERSION:=1.0.8}"
-    install_deb 'https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb' onlyoffice
     install_deb "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.deb" obsidian
     install_deb "https://download.sublimetext.com/sublime-text_build-${SUBLIME_BUILD}_amd64.deb" sublime-text
     install_deb "https://github.com/localsend/localsend/releases/download/v${LOCALSEND_VERSION}/LocalSend-${LOCALSEND_VERSION}-linux-x86-64.deb" localsend
