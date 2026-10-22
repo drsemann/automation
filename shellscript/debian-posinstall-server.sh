@@ -8,14 +8,12 @@ usage() {
 Uso: sudo bash debian-posinstall.sh [opcoes]
   --user NOME           Configura root e este usuario existente; pode repetir.
                         Sem a opcao, usa SUDO_USER. Como root, informe --user.
-  --dotfiles-only       Apenas configura os dotfiles, sem APT ou Fail2ban.
+  --dotfiles-only       Apenas configura os dotfiles, sem APT.
   --reset-repositories Substitui fontes APT por fontes oficiais (com backup).
                         Desativa tambem fontes de terceiros; opcao explicita.
   --no-upgrade          Nao executa apt-get upgrade.
-  --no-fail2ban         Nao instala nem configura Fail2ban.
   -h, --help            Exibe esta ajuda.
 Nao cria contas. Backups e log: /var/backups/debian-posinstall/<execucao>/
-Variaveis opcionais: F2B_IGNOREIP, F2B_BANTIME, F2B_FINDTIME, F2B_MAXRETRY.
 HELP
 }
 die() { printf 'ERRO: %s\n' "$*" >&2; exit 1; }
@@ -24,14 +22,12 @@ users=()
 dotfiles_only=0
 reset_repositories=0
 upgrade=1
-fail2ban=1
 while (($#)); do
     case "$1" in
         --user) (($# >= 2)) || die 'Informe o nome apos --user.'; users+=("$2"); shift 2 ;;
         --dotfiles-only) dotfiles_only=1; shift ;;
         --reset-repositories) reset_repositories=1; shift ;;
         --no-upgrade) upgrade=0; shift ;;
-        --no-fail2ban) fail2ban=0; shift ;;
         -h|--help) usage; exit 0 ;;
         *) die "Opcao desconhecida: $1" ;;
     esac
@@ -122,49 +118,8 @@ EOF
         traceroute tree ipcalc whois dnsutils net-tools ncdu bash-completion
         curl grc nmap links tcpdump ethtool iptraf-ng micro btop python3-pip
         bat zoxide ripgrep duf)
-    if ((fail2ban)); then packages+=(fail2ban python3-systemd nftables); fi
     log 'Instalando pacotes'
     apt-get install -y "${packages[@]}"
-    if ((fail2ban)); then
-        [[ -d /run/systemd/system ]] || die 'Fail2ban requer systemd neste script; use --no-fail2ban em containers.'
-        if command -v sshd >/dev/null 2>&1; then
-            ignoreip=${F2B_IGNOREIP:-127.0.0.1/8 ::1}
-            bantime=${F2B_BANTIME:-72h}
-            findtime=${F2B_FINDTIME:-10m}
-            maxretry=${F2B_MAXRETRY:-5}
-            [[ $maxretry =~ ^[1-9][0-9]*$ ]] || die 'F2B_MAXRETRY invalido.'
-            for value in "$ignoreip" "$bantime" "$findtime"; do
-                [[ $value != *$'\n'* && $value != *$'\r'* ]] || die 'Valor Fail2ban com quebra de linha.'
-            done
-            # Inclui o IP do administrador da conexao SSH atual para evitar autobloqueio.
-            if [[ -n ${SSH_CONNECTION:-} ]]; then ignoreip+=" ${SSH_CONNECTION%% *}"; fi
-            jail=/etc/fail2ban/jail.d/99-posinstall.local
-            backup "$jail"
-            [[ ! -L $jail ]] || die "Link simbolico recusado: $jail"
-            cat > "$jail" <<EOF
-# Gerenciado por debian-posinstall.sh
-[sshd]
-enabled = true
-backend = systemd
-banaction = nftables-multiport
-ignoreip = $ignoreip
-bantime = $bantime
-findtime = $findtime
-maxretry = $maxretry
-EOF
-            chmod 0644 "$jail"
-            log 'Validando Fail2ban'
-            if ! fail2ban-client -t; then
-                if [[ -e $backup_dir$jail ]]; then cp -a -- "$backup_dir$jail" "$jail"; else rm -f -- "$jail"; fi
-                die 'Configuracao Fail2ban invalida; arquivo anterior restaurado.'
-            fi
-            systemctl enable fail2ban.service
-            systemctl restart fail2ban.service
-            fail2ban-client status sshd
-        else
-            log 'sshd ausente: jail SSH nao foi configurada.'
-        fi
-    fi
 fi
 
 cat > "$work/bashrc" <<'BASHRC'
